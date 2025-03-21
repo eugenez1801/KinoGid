@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<!--    <style name="TextAppearance.PTSerif.Title">-->
+<!--        <item name="android:textSize">64sp</item>-->
+<!--        <item name="android:textColor">@color/primaryColor</item>-->
+<!--        <item name="fontFamily">@font/pt_serif_caption_regular</item>-->
+<!--    </style>   без наследования (некрасиво)-->
+
+    <style name="TextAppearance">
+    </style>
+    <style name="TextAppearance.PTSerif">
+        <item name="android:fontFamily">@font/pt_serif_caption_regular</item>
+    </style>
+    <style name="TextAppearance.PTSerif.Title">
+        <item name="android:fontFamily">@font/pt_serif_bold</item>
+        <item name="android:textColor">@color/primaryColor</item>-->
+        <item name="android:textSize">64sp</item>
+    </style>
+
+    <style name="TextAppearance.PTSerifCaption">
+        <item name="android:fontFamily">@font/pt_serif_caption_regular</item>
+    </style>
+    <style name="TextAppearance.PTSerifCaption.AuthReg">
+        <item name="android:textSize">32sp</item>
+        <item name="android:textColor">@color/primaryColor</item>
+    </style>
+    <style name="TextAppearance.PTSerifCaption.HintText">
+        <item name="android:textSize">16sp</item>
+    </style>
+    <style name="TextAppearance.PTSerifCaption.ButtonText">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">#F4EDEB</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+    <style name="TextAppearance.PTSerifCaption.AddText">
+        <item name="android:textSize">16sp</item>
+    </style>
+
+</resources>
