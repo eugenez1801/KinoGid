@@ -18,6 +18,7 @@ class RegistrationFragment: Fragment() {
 
         enterText.setOnClickListener{
             val authorizationFragment = AuthorizationFragment.newInstance()
+
             val transaction = parentFragmentManager.beginTransaction()
             transaction.replace(R.id.fragment_container, authorizationFragment)
             transaction.addToBackStack(null)

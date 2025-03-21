@@ -14,10 +14,11 @@ class AuthorizationFragment: Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_authorization, container, false)
-
         val registerText = view.findViewById<TextView>(R.id.registrationText)
+
         registerText.setOnClickListener{
             val fragmentRegistration = RegistrationFragment.newInstance()
+
             val transaction = parentFragmentManager.beginTransaction()
             transaction.replace(R.id.fragment_container, fragmentRegistration)
             transaction.addToBackStack(null)
