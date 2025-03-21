@@ -27,12 +27,39 @@
         android:layout_marginStart="33dp"
         android:layout_marginTop="140dp"
 
-        android:text="Вход"
+        android:text="Регистрация"
         style="@style/TextAppearance.PTSerifCaption.AuthReg"
 
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/name"
+        style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginStart="33dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="33dp"
+        app:boxBackgroundColor="@color/primaryColor"
+        app:boxCornerRadiusBottomEnd="14dp"
+        app:boxCornerRadiusBottomStart="14dp"
+        app:boxCornerRadiusTopEnd="14dp"
+        app:boxCornerRadiusTopStart="14dp"
+        app:boxStrokeColor="@color/primaryColor"
+        app:hintTextColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/registration"
+        android:textColorHint="@color/secondaryColor">
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="Имя пользователя"
+            android:inputType="text"
+            android:textAppearance="@style/TextAppearance.PTSerifCaption.HintText"/>
+    </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/login"
@@ -51,7 +78,7 @@
         app:hintTextColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/registration"
+        app:layout_constraintTop_toBottomOf="@+id/name"
         android:textColorHint="@color/secondaryColor">
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
@@ -99,7 +126,7 @@
         android:layout_marginEnd="33dp"
         android:background="@drawable/shape_rounded"
         android:backgroundTint="@color/buttonColor"
-        android:text="Войти"
+        android:text="Зарегистрироваться"
         android:textAppearance="@style/TextAppearance.PTSerifCaption.ButtonText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -111,19 +138,19 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="33dp"
         android:layout_marginTop="6dp"
-        android:text="Еще нет аккаунта?"
+        android:text="Уже есть аккаунт?"
         style="@style/TextAppearance.PTSerifCaption.AddText"
         android:textColor="#B6A19E"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/registration_button" />
 
     <TextView
-        android:id="@+id/registrationText"
+        android:id="@+id/enterText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="6dp"
         android:layout_marginStart="3dp"
-        android:text="Зарегистрируйтесь"
+        android:text="Войдите"
         style="@style/TextAppearance.PTSerifCaption.AddText"
         android:textColor="#F4EDEB"
         app:layout_constraintStart_toEndOf="@+id/textView2"
