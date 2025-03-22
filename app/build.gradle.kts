@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     id("com.google.devtools.ksp")
+    kotlin("kapt")
 }
 
 android {
@@ -37,12 +38,12 @@ android {
 }
 
 dependencies {
-
     implementation(libs.androidx.room.runtime)
+//    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.4.0") не было нужно для viewModelScope
+    implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0")//для viewModelScope
     // If this project uses any Kotlin source, use Kotlin Symbol Processing (KSP)
     // See Add the KSP plugin to your project
     ksp(libs.androidx.room.compiler)
-
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
@@ -51,4 +52,5 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+    implementation("androidx.room:room-ktx:2.6.1")
 }

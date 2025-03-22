@@ -8,24 +8,29 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.room.Room
+import com.example.kinogid.database.AppDatabase
 import com.google.android.material.textfield.TextInputEditText
 
 class RegistrationFragment: Fragment() {
-    private val registrationViewModel: RegistrationViewModel by lazy {
-        ViewModelProvider(this).get(RegistrationViewModel::class.java)
-    }
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        val userDatabase = Room.databaseBuilder(
+            requireContext().applicationContext,
+            AppDatabase::class.java,
+            "app_database"
+        ).build()
+        val userDao = userDatabase.userDao()
+        val userRepository = UserRepository(userDao)
+        val registrationViewModel = RegistrationViewModel(userRepository)
+
         val view = inflater.inflate(R.layout.fragment_registration, container, false)
+
         val enterText = view.findViewById<TextView>(R.id.enterText)
 
-        val registrationText = view.findViewById<TextView>(R.id.registration)
-        /*val loginInputText = view.findViewById<TextInputLayout>(R.id.login) чтобы считать текст
-        * нужно обращаться к TextInputEditText а не Layout*/
         val nameInputText = view.findViewById<TextInputEditText>(R.id.name_input)
         val loginInputText = view.findViewById<TextInputEditText>(R.id.login_input)
         val passwordInputText = view.findViewById<TextInputEditText>(R.id.password_input)
@@ -41,17 +46,16 @@ class RegistrationFragment: Fragment() {
         }
 
         registerButton.setOnClickListener{
-            /*var userName: String = nameInputText.text.toString() *//*Просто для тренировки*//*
-            var userLogin: String = loginInputText.text.toString()
-            var userPassword: String = passwordInputText.text.toString()
-            registrationText.text = "$userName $userLogin $userPassword"*/
-            registrationViewModel.addNewUser(nameInputText.text.toString(),
+            registrationViewModel.registerUser(nameInputText.text.toString(),
                 loginInputText.text.toString(),
-                passwordInputText.text.toString())
-        }
-
-        registrationViewModel.toastMessage.observe(viewLifecycleOwner){
-            Toast.makeText(requireContext(), it, Toast.LENGTH_LONG).show()
+                passwordInputText.text.toString()){ success ->
+                if (success){
+                    Toast.makeText(context, "Добро пожаловать в КиноГид, ${nameInputText.text.toString()}!",
+                        Toast.LENGTH_LONG).show()
+                }
+                if (!success)Toast.makeText(context, "Произошла ошибка регистрации!",
+                    Toast.LENGTH_LONG).show()
+            }
         }
         return view
     }

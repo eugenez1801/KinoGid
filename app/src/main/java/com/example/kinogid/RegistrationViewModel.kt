@@ -1,19 +1,22 @@
 package com.example.kinogid
 
-import android.widget.Toast
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.launch
 
-class RegistrationViewModel: ViewModel() {
-    val _toastMessage = MutableLiveData<String>()
-    val toastMessage: LiveData<String> get() = _toastMessage
-
-    fun addNewUser(name: String, login: String, password: String){
-        /*Toast.makeText(context, "Welcome, $name. U r login is $login. U r password is $password",
-         Toast.LENGTH_LONG).show() Так нельзя, потому что В архитектуре MVVM ViewModel не
-         должна напрямую взаимодействовать с UI (например, показывать Toast). Вместо этого ViewModel
-         должна сообщать Fragment о необходимости показать Toast через LiveData*/
-        _toastMessage.value = "Welcome, $name. U r login is $login. U r password is $password"
+class RegistrationViewModel(private val userRepository: UserRepository): ViewModel() {
+/*Параметр success — это результат операции, который передается из ViewModel в UI-слой
+(фрагмент/активность) через callback.*/
+    fun registerUser(name: String, login: String, password: String, onResult: (Boolean) -> Unit){
+        viewModelScope.launch {
+            if (name.isNotBlank() && login.isNotBlank() and password.isNotBlank()){
+                val user = User(name = name, login = login, password = password)
+                val success = userRepository.addUser(user)
+                onResult(success)
+            }
+            else onResult(false)
+        }
     }
+
+
 }

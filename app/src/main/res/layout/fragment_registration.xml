@@ -9,7 +9,7 @@
     android:background="@color/backgroundColor">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/app_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="78dp"
@@ -21,7 +21,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
     <TextView
-        android:id="@+id/registration"
+        android:id="@+id/enter"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="33dp"
@@ -32,7 +32,7 @@
 
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/app_name" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/name"
@@ -51,7 +51,7 @@
         app:hintTextColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/registration"
+        app:layout_constraintTop_toBottomOf="@+id/enter"
         android:textColorHint="@color/secondaryColor">
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/name_input"
@@ -152,6 +152,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="6dp"
         android:layout_marginStart="3dp"
+        android:paddingEnd="15dp"
+        android:paddingBottom="15dp"
         android:text="Войдите"
         style="@style/TextAppearance.PTSerifCaption.AddText"
         android:textColor="#F4EDEB"
