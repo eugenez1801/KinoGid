@@ -25,7 +25,7 @@ class RegistrationFragment: Fragment() {
         ).build()
         val userDao = userDatabase.userDao()
         val userRepository = UserRepository(userDao)
-        val registrationViewModel = RegistrationViewModel(userRepository)
+        val viewModel = AuthViewModel(userRepository)
 
         val view = inflater.inflate(R.layout.fragment_registration, container, false)
 
@@ -37,27 +37,32 @@ class RegistrationFragment: Fragment() {
         val registerButton = view.findViewById<Button>(R.id.registration_button)
 
         enterText.setOnClickListener{
-            val authorizationFragment = AuthorizationFragment.newInstance()
-
-            val transaction = parentFragmentManager.beginTransaction()
-            transaction.replace(R.id.fragment_container, authorizationFragment)
-            transaction.addToBackStack(null)
-            transaction.commit()
+            moveToAuthorization()
         }
 
         registerButton.setOnClickListener{
-            registrationViewModel.registerUser(nameInputText.text.toString(),
+            viewModel.registerUser(nameInputText.text.toString(),
                 loginInputText.text.toString(),
                 passwordInputText.text.toString()){ success ->
                 if (success){
-                    Toast.makeText(context, "Добро пожаловать в КиноГид, ${nameInputText.text.toString()}!",
+                    Toast.makeText(context, "Регистрация пользователя ${nameInputText.text.toString()} прошла успешно!",
                         Toast.LENGTH_LONG).show()
+                    moveToAuthorization()
                 }
                 if (!success)Toast.makeText(context, "Произошла ошибка регистрации!",
                     Toast.LENGTH_LONG).show()
             }
         }
         return view
+    }
+
+    private fun moveToAuthorization(){
+        val authorizationFragment = AuthorizationFragment.newInstance()
+
+        val transaction = parentFragmentManager.beginTransaction()
+        transaction.replace(R.id.fragment_container, authorizationFragment)
+        transaction.addToBackStack(null)
+        transaction.commit()
     }
 
     companion object {

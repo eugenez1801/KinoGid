@@ -4,9 +4,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 
-class RegistrationViewModel(private val userRepository: UserRepository): ViewModel() {
-/*Параметр success — это результат операции, который передается из ViewModel в UI-слой
-(фрагмент/активность) через callback.*/
+class AuthViewModel(private val userRepository: UserRepository): ViewModel() {
+    /*Параметр success — это результат операции, который передается из ViewModel в UI-слой
+    (фрагмент/активность) через callback.*/
     fun registerUser(name: String, login: String, password: String, onResult: (Boolean) -> Unit){
         viewModelScope.launch {
             if (name.isNotBlank() && login.isNotBlank() and password.isNotBlank()){
@@ -18,5 +18,10 @@ class RegistrationViewModel(private val userRepository: UserRepository): ViewMod
         }
     }
 
-
+    fun authenticateUser(login: String, password: String, onResult: (Boolean) -> Unit){
+        viewModelScope.launch {
+            if (userRepository.authenticate(login, password) != null) onResult(true)
+            else onResult(false)
+        }
+    }
 }
