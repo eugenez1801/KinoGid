@@ -5,16 +5,17 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 
 class AuthViewModel(private val userRepository: UserRepository): ViewModel() {
-    /*Параметр success — это результат операции, который передается из ViewModel в UI-слой
+    /*Параметр resultCode — это результат операции, который передается из ViewModel в UI-слой
     (фрагмент/активность) через callback.*/
-    fun registerUser(name: String, login: String, password: String, onResult: (Boolean) -> Unit){
+    fun registerUser(name: String, login: String, password: String, onResult: (Int) -> Unit){
         viewModelScope.launch {
             if (name.isNotBlank() && login.isNotBlank() and password.isNotBlank()){
                 val user = User(name = name, login = login, password = password)
-                val success = userRepository.addUser(user)
-                onResult(success)
+                val resultCode = userRepository.addUser(user)
+                onResult(resultCode)
             }
-            else onResult(false)
+            /*НОВЫЙ РЕЗУЛЬТИРУЮЩИЙ КОД 5 - заполните все поля*/
+            else onResult(5)
         }
     }
 

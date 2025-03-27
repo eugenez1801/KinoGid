@@ -43,14 +43,17 @@ class RegistrationFragment: Fragment() {
         registerButton.setOnClickListener{
             viewModel.registerUser(nameInputText.text.toString(),
                 loginInputText.text.toString(),
-                passwordInputText.text.toString()){ success ->
-                if (success){
-                    Toast.makeText(context, "Регистрация пользователя ${nameInputText.text.toString()} прошла успешно!",
-                        Toast.LENGTH_LONG).show()
-                    moveToAuthorization()
+                passwordInputText.text.toString()){ resultCode ->
+                val registrationMessage = when(resultCode){
+                    1 -> "Регистрация пользователя ${nameInputText.text.toString()} прошла успешно!"
+                        .also { moveToAuthorization() }
+                    2 -> "Такое имя пользователя уже занято!"
+                    3 -> "Такой логин уже был использован для регистрации"
+                    4 -> "Непредвиденная ошибка регистрации!"
+                    5 -> "Заполните все необходимые поля для регистрации!"
+                    else -> null
                 }
-                if (!success)Toast.makeText(context, "Произошла ошибка регистрации!",
-                    Toast.LENGTH_LONG).show()
+                Toast.makeText(context, registrationMessage, Toast.LENGTH_SHORT).show()
             }
         }
         return view

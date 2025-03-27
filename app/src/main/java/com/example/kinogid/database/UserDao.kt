@@ -9,10 +9,13 @@ import java.util.UUID
 @Dao
 interface UserDao {
     @Query("SELECT * FROM user WHERE id = (:id)")
-    fun getUser(id: UUID): User//тут еще ? стоит добавить, но пока без него
+    fun getUser(id: UUID): User
 
     @Query("SELECT * FROM user WHERE login = (:login)")
-    suspend fun getUserByLogin(login: String): User
+    suspend fun getUserByLogin(login: String): User?
+
+    @Query("SELECT * FROM user WHERE name = (:name)")
+    suspend fun getUserByName(name: String): User?
 
     @Insert
     suspend fun addUser(user: User)
