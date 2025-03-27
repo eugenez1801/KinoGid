@@ -1,5 +1,6 @@
 package com.example.kinogid
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -47,8 +48,15 @@ class AuthorizationFragment: Fragment() {
         enterButton.setOnClickListener{
             viewModel.authenticateUser(loginInputText.text.toString(),
                 passwordInputText.text.toString()){ success ->
-                if(success) Toast.makeText(requireContext(), "Вход успешен!",
-                    Toast.LENGTH_LONG).show()
+                if(success) {
+                    Toast.makeText(
+                        requireContext(), "Вход успешен!",
+                        Toast.LENGTH_LONG
+                    ).show()
+                    val intent: Intent
+                    intent = MainActivity.newIntent(requireContext(), loginInputText.text.toString())
+                    startActivity(intent)
+                }
                 else Toast.makeText(requireContext(), "Указан неверный логин/пароль " +
                         "Проверьте данные",
                     Toast.LENGTH_LONG).show()

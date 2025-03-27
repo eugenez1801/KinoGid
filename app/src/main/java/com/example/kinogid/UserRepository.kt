@@ -12,6 +12,11 @@ class UserRepository(private val userDao: UserDao) {
         return userDao.getUser(id)
     }
 
+    suspend fun getUserByLogin(login: String): User{
+        return userDao.getUserByLogin(login) /*при использовании такого способа нужно
+         гарантировать уникальность каждого логина*/
+    }
+
     suspend fun addUser(user: User): Boolean{
         try {
             userDao.addUser(user)

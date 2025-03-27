@@ -9,12 +9,15 @@
     <style name="TextAppearance">
     </style>
     <style name="TextAppearance.PTSerif">
-        <item name="android:fontFamily">@font/pt_serif_caption_regular</item>
+        <item name="android:fontFamily">@font/pt_serif_bold</item>
     </style>
     <style name="TextAppearance.PTSerif.Title">
-        <item name="android:fontFamily">@font/pt_serif_bold</item>
-        <item name="android:textColor">@color/primaryColor</item>-->
+        <item name="android:textColor">@color/primaryColor</item>
         <item name="android:textSize">64sp</item>
+    </style>
+    <style name="TextAppearance.PTSerif.SubTitle">
+        <item name="android:textColor">@color/primaryColor</item>
+        <item name="android:textSize">32sp</item>
     </style>
 
     <style name="TextAppearance.PTSerifCaption">
@@ -22,6 +25,10 @@
     </style>
     <style name="TextAppearance.PTSerifCaption.AuthReg">
         <item name="android:textSize">32sp</item>
+        <item name="android:textColor">@color/primaryColor</item>
+    </style>
+    <style name="TextAppearance.PTSerifCaption.SecondarySubTitle">
+        <item name="android:textSize">24sp</item>
         <item name="android:textColor">@color/primaryColor</item>
     </style>
     <style name="TextAppearance.PTSerifCaption.HintText">
