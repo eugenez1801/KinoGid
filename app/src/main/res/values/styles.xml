@@ -19,6 +19,10 @@
         <item name="android:textColor">@color/primaryColor</item>
         <item name="android:textSize">32sp</item>
     </style>
+    <style name="TextAppearance.PTSerif.ProfileFields">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">20sp</item>
+    </style>
 
     <style name="TextAppearance.PTSerifCaption">
         <item name="android:fontFamily">@font/pt_serif_caption_regular</item>

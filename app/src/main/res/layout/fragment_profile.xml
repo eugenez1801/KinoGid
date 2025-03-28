@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/backgroundColor">
+
+    <TextView
+        android:id="@+id/profile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+
+        android:text="Профиль"
+
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="44dp"
+
+        style="@style/TextAppearance.PTSerifCaption.SecondarySubTitle"/>
+
+    <TextView
+        android:id="@+id/name_field"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/profile"
+
+        tools:text="Имя: Любитель кино"
+        android:gravity="center"
+
+        android:background="@color/primaryColor"
+        android:textColor="@color/black"
+
+        android:layout_marginStart="14dp"
+        android:layout_marginEnd="14dp"
+        android:layout_marginTop="44dp"
+
+        style="@style/TextAppearance.PTSerif.ProfileFields"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

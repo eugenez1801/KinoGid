@@ -6,4 +6,6 @@
     <color name="secondaryColor">#2C1A1D</color>
     <color name="buttonColor">#A35838</color>
     <color name="backgroundColor">#AF2B1E</color>
+    <color name="blue">#0000FF</color>
+    <color name="red">#FF0000</color>
 </resources>

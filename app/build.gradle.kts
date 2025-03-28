@@ -38,15 +38,23 @@ android {
 }
 
 dependencies {
+    implementation(libs.androidx.navigation.compose)
+
+    // Views/Fragments integration
+    implementation(libs.androidx.navigation.fragment)
+    implementation(libs.androidx.navigation.ui)
     implementation(libs.androidx.room.runtime)
 //    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.4.0") не было нужно для viewModelScope
-    implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0")//для viewModelScope
+    implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0")
+    implementation(libs.androidx.navigation.fragment.ktx)
+    implementation(libs.androidx.navigation.ui.ktx)//для viewModelScope
     // If this project uses any Kotlin source, use Kotlin Symbol Processing (KSP)
     // See Add the KSP plugin to your project
     ksp(libs.androidx.room.compiler)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
+    implementation (libs.material.v160)//вообще лишнее, я думал для BottomNavBar нужно, но походу нет
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
     testImplementation(libs.junit)

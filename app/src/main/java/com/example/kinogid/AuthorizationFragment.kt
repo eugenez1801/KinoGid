@@ -40,7 +40,7 @@ class AuthorizationFragment: Fragment() {
             val fragmentRegistration = RegistrationFragment.newInstance()
 
             val transaction = parentFragmentManager.beginTransaction()
-            transaction.replace(R.id.fragment_container, fragmentRegistration)
+            transaction.replace(R.id.nav_host_fragment, fragmentRegistration)
             transaction.addToBackStack(null)
             transaction.commit()
         }

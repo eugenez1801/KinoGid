@@ -8,7 +8,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 
-class RecommendationsFragment: Fragment() {
+class ProfileFragment: Fragment() {
     private lateinit var viewModel: MainViewModel
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -16,13 +16,11 @@ class RecommendationsFragment: Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         viewModel = ViewModelProvider(requireActivity())[MainViewModel::class.java]
-
-        val view = inflater.inflate(R.layout.fragment_recommendations, container, false)
-        val nameTextView = view.findViewById<TextView>(R.id.name_text)
-
         val user = viewModel.user.value!!
-        nameTextView.text = "${user.name}!"
 
+        val view = inflater.inflate(R.layout.fragment_profile, container, false)
+        val nameField = view.findViewById<TextView>(R.id.name_field)
+        nameField.text = "Имя: ${user.name}"
         return view
     }
 }

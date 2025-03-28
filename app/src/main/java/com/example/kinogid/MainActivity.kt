@@ -7,19 +7,22 @@ import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.setupWithNavController
 import androidx.room.Room
 import com.example.kinogid.database.AppDatabase
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 private const val LOGIN_OF_USER = "user_login"
 
-private lateinit var currentUser: User
-
 class MainActivity : AppCompatActivity() {
     private lateinit var viewModel: MainViewModel
+    private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
+//        enableEdgeToEdge()
         setContentView(R.layout.activity_main)
 
         val database = Room.databaseBuilder(
@@ -38,11 +41,15 @@ class MainActivity : AppCompatActivity() {
         //запускаем фрагмент только после того, как user будет иметь значение
         viewModel.user.observe(this){ user ->
             if (user != null) {
-                val fragmentRegistration = RecommendationsFragment.newInstance()
-                val transaction = supportFragmentManager.beginTransaction()
-                transaction.replace(R.id.fragment_container, fragmentRegistration)
-                transaction.addToBackStack(null)
-                transaction.commit()
+                val navHostFragment = supportFragmentManager
+                    .findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+                navController = navHostFragment.navController
+
+                navController.setGraph(R.navigation.nav_graph)
+
+                val bottomNav = findViewById<BottomNavigationView>(R.id.bottom_nav)
+                bottomNav.setupWithNavController(navController)
+
             }
         }
     }

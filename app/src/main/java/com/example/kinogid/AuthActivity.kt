@@ -3,21 +3,19 @@ package com.example.kinogid
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 
 class AuthActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
+//        enableEdgeToEdge()
         setContentView(R.layout.activity_auth)
         val currentFragment =
-            supportFragmentManager.findFragmentById(R.id.fragment_container)
+            supportFragmentManager.findFragmentById(R.id.nav_host_fragment)
         if (currentFragment == null) {
             val fragment = AuthorizationFragment.newInstance()
             supportFragmentManager
                 .beginTransaction()
-                .replace(R.id.fragment_container, fragment)//сделал replace вместо add изначального
+                .replace(R.id.nav_host_fragment, fragment)//сделал replace вместо add изначального
                 .commit()
         }
     }

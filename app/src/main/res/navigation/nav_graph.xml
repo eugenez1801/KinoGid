@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/menu_recommendations">
+
+    <fragment
+        android:id="@+id/menu_recommendations"
+        android:name="com.example.kinogid.RecommendationsFragment"
+        android:label="fragment_recommendations" >
+        <action
+            android:id="@+id/action_recommendationsFragment_to_profileFragment"
+            app:destination="@id/menu_profile" />
+    </fragment>
+    <fragment
+        android:id="@+id/menu_profile"
+        android:name="com.example.kinogid.ProfileFragment"
+        android:label="fragment_profile" >
+        <action
+            android:id="@+id/action_profileFragment_to_recommendationsFragment"
+            app:destination="@id/menu_recommendations" />
+    </fragment>
+</navigation>
