@@ -156,7 +156,7 @@
         android:paddingBottom="15dp"
         android:text="Войдите"
         style="@style/TextAppearance.PTSerifCaption.AddText"
-        android:textColor="#F4EDEB"
+        android:textColor="@color/buttonTextColor"
         app:layout_constraintStart_toEndOf="@+id/textView2"
         app:layout_constraintTop_toBottomOf="@+id/registration_button" />
 

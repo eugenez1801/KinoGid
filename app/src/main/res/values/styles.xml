@@ -40,7 +40,7 @@
     </style>
     <style name="TextAppearance.PTSerifCaption.ButtonText">
         <item name="android:textSize">20sp</item>
-        <item name="android:textColor">#F4EDEB</item>
+        <item name="android:textColor">@color/buttonTextColor</item>
         <item name="android:textAllCaps">false</item>
     </style>
     <style name="TextAppearance.PTSerifCaption.AddText">

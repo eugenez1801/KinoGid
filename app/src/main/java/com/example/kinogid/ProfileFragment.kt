@@ -20,7 +20,13 @@ class ProfileFragment: Fragment() {
 
         val view = inflater.inflate(R.layout.fragment_profile, container, false)
         val nameField = view.findViewById<TextView>(R.id.name_field)
+        val preferencesField = view.findViewById<TextView>(R.id.preferences_field)
+
         nameField.text = "Имя: ${user.name}"
+
+        preferencesField.setOnClickListener{
+            GenreSelectorDialogFragment().show(parentFragmentManager, "GenreSelector")
+        }
         return view
     }
 }

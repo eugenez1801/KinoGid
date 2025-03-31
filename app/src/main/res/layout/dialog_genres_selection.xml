@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/backgroundColor"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/enter_to_prefences"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:text="Укажите свои предпочтения по жанрам"
+        style="@style/TextAppearance.PTSerifCaption.SecondarySubTitle"
+        android:textSize="20sp"
+        android:gravity="center"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.chip.Chip
+        android:id="@+id/action_chip"
+        style="@style/Widget.MaterialComponents.Chip.Filter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+
+        android:text="Боевик"
+
+        android:textColor="@color/chip_text"
+        app:chipBackgroundColor="@color/chip_background"
+        app:checkedIconTint="@color/black"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/enter_to_prefences" />
+
+    <com.google.android.material.chip.Chip
+        android:id="@+id/adventure_chip"
+        style="@style/Widget.MaterialComponents.Chip.Filter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+
+        android:text="Приключения"
+
+        android:textColor="@color/chip_text"
+        app:chipBackgroundColor="@color/chip_background"
+        app:checkedIconTint="@color/black"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/enter_to_prefences" />
+
+    <com.google.android.material.chip.Chip
+        android:id="@+id/animation_chip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Мультфильм"
+
+        android:textColor="@color/chip_text"
+        app:chipBackgroundColor="@color/chip_background"
+        app:checkedIconTint="@color/black"
+
+        style="@style/Widget.MaterialComponents.Chip.Filter"
+        android:layout_marginTop="40dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/action_chip" />
+
+    <com.google.android.material.chip.Chip
+        android:id="@+id/biography_chip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Биография"
+
+        android:textColor="@color/chip_text"
+        app:chipBackgroundColor="@color/chip_background"
+        app:checkedIconTint="@color/black"
+
+        style="@style/Widget.MaterialComponents.Chip.Filter"
+        android:layout_marginTop="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/adventure_chip"/>
+
+    <com.google.android.material.chip.Chip
+        android:id="@+id/comedy_chip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Комедия"
+
+        android:textColor="@color/chip_text"
+        app:chipBackgroundColor="@color/chip_background"
+        app:checkedIconTint="@color/black"
+
+        style="@style/Widget.MaterialComponents.Chip.Filter"
+        android:layout_marginTop="40dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/animation_chip"/>
+
+    <com.google.android.material.chip.Chip
+        android:id="@+id/crime_chip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Криминал"
+
+        android:textColor="@color/chip_text"
+        app:chipBackgroundColor="@color/chip_background"
+        app:checkedIconTint="@color/black"
+
+        style="@style/Widget.MaterialComponents.Chip.Filter"
+        android:layout_marginTop="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/biography_chip"/>
+
+    <com.google.android.material.chip.Chip
+        android:id="@+id/documentary_chip"
+        style="@style/Widget.MaterialComponents.Chip.Filter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Документальный"
+
+        android:textColor="@color/chip_text"
+        app:chipBackgroundColor="@color/chip_background"
+        app:checkedIconTint="@color/black"
+
+        android:layout_marginTop="40dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/comedy_chip"/>
+
+    <com.google.android.material.chip.Chip
+        android:id="@+id/drama_chip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Драма"
+
+        android:textColor="@color/chip_text"
+        app:chipBackgroundColor="@color/chip_background"
+        app:checkedIconTint="@color/black"
+
+        style="@style/Widget.MaterialComponents.Chip.Filter"
+        android:layout_marginTop="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/crime_chip"/>
+
+    <com.google.android.material.chip.Chip
+        android:id="@+id/family_chip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Семейный"
+
+        android:textColor="@color/chip_text"
+        app:chipBackgroundColor="@color/chip_background"
+        app:checkedIconTint="@color/black"
+
+        style="@style/Widget.MaterialComponents.Chip.Filter"
+        android:layout_marginTop="40dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/documentary_chip"/>
+
+    <com.google.android.material.chip.Chip
+        android:id="@+id/fantasy_chip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Фэнтези"
+
+        android:textColor="@color/chip_text"
+        app:chipBackgroundColor="@color/chip_background"
+        app:checkedIconTint="@color/black"
+
+        style="@style/Widget.MaterialComponents.Chip.Filter"
+        android:layout_marginTop="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/drama_chip"/>
+
+    <com.google.android.material.chip.Chip
+        android:id="@+id/horror_chip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ужасы"
+
+        android:textColor="@color/chip_text"
+        app:chipBackgroundColor="@color/chip_background"
+        app:checkedIconTint="@color/black"
+
+        style="@style/Widget.MaterialComponents.Chip.Filter"
+        android:layout_marginTop="40dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/family_chip"/>
+
+    <com.google.android.material.chip.Chip
+        android:id="@+id/musical_chip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Мюзикл"
+
+        android:textColor="@color/chip_text"
+        app:chipBackgroundColor="@color/chip_background"
+        app:checkedIconTint="@color/black"
+
+        style="@style/Widget.MaterialComponents.Chip.Filter"
+        android:layout_marginTop="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/fantasy_chip"/>
+
+    <com.google.android.material.chip.Chip
+        android:id="@+id/mystery_chip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Детектив"
+
+        android:textColor="@color/chip_text"
+        app:chipBackgroundColor="@color/chip_background"
+        app:checkedIconTint="@color/black"
+
+        style="@style/Widget.MaterialComponents.Chip.Filter"
+        android:layout_marginTop="40dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/horror_chip"/>
+
+    <com.google.android.material.chip.Chip
+        android:id="@+id/romance_chip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Мелодрама"
+
+        android:textColor="@color/chip_text"
+        app:chipBackgroundColor="@color/chip_background"
+        app:checkedIconTint="@color/black"
+
+        style="@style/Widget.MaterialComponents.Chip.Filter"
+        android:layout_marginTop="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/musical_chip"/>
+
+    <com.google.android.material.chip.Chip
+        android:id="@+id/sci_fi_chip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Фантастика"
+
+        android:textColor="@color/chip_text"
+        app:chipBackgroundColor="@color/chip_background"
+        app:checkedIconTint="@color/black"
+
+        style="@style/Widget.MaterialComponents.Chip.Filter"
+        android:layout_marginTop="40dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/mystery_chip"/>
+
+    <com.google.android.material.chip.Chip
+        android:id="@+id/sport_chip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Спорт"
+
+        android:textColor="@color/chip_text"
+        app:chipBackgroundColor="@color/chip_background"
+        app:checkedIconTint="@color/black"
+
+        style="@style/Widget.MaterialComponents.Chip.Filter"
+        android:layout_marginTop="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/romance_chip"/>
+
+    <com.google.android.material.chip.Chip
+        android:id="@+id/superhero_chip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Супергероика"
+
+        android:textColor="@color/chip_text"
+        app:chipBackgroundColor="@color/chip_background"
+        app:checkedIconTint="@color/black"
+
+        style="@style/Widget.MaterialComponents.Chip.Filter"
+        android:layout_marginTop="40dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/sci_fi_chip"/>
+
+    <com.google.android.material.chip.Chip
+        android:id="@+id/thriller_chip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Триллер"
+
+        android:textColor="@color/chip_text"
+        app:chipBackgroundColor="@color/chip_background"
+        app:checkedIconTint="@color/black"
+
+        style="@style/Widget.MaterialComponents.Chip.Filter"
+        android:layout_marginTop="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/sport_chip"/>
+
+    <com.google.android.material.chip.Chip
+        android:id="@+id/war_chip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Военный"
+
+        android:textColor="@color/chip_text"
+        app:chipBackgroundColor="@color/chip_background"
+        app:checkedIconTint="@color/black"
+
+        style="@style/Widget.MaterialComponents.Chip.Filter"
+        android:layout_marginTop="40dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/superhero_chip"/>
+
+    <com.google.android.material.chip.Chip
+        android:id="@+id/western_chip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Вестерн"
+
+        android:textColor="@color/chip_text"
+        app:chipBackgroundColor="@color/chip_background"
+        app:checkedIconTint="@color/black"
+
+        style="@style/Widget.MaterialComponents.Chip.Filter"
+        android:layout_marginTop="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/thriller_chip"/>
+</androidx.constraintlayout.widget.ConstraintLayout>
