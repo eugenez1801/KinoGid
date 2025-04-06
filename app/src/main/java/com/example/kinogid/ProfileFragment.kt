@@ -7,9 +7,11 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.example.kinogid.movies.Genre
 
-class ProfileFragment: Fragment() {
+class ProfileFragment: Fragment(), GenreSelectorDialogFragment.OnGenresSelectedListener {
     private lateinit var viewModel: MainViewModel
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -22,11 +24,28 @@ class ProfileFragment: Fragment() {
         val nameField = view.findViewById<TextView>(R.id.name_field)
         val preferencesField = view.findViewById<TextView>(R.id.preferences_field)
 
+        viewModel.getUserPreferences()
         nameField.text = "Имя: ${user.name}"
 
         preferencesField.setOnClickListener{
-            GenreSelectorDialogFragment().show(parentFragmentManager, "GenreSelector")
+            val userPreferences = viewModel.userPreferences.value
+            val dialogFragment = GenreSelectorDialogFragment().apply {
+                arguments = Bundle().apply {
+                    putString("usersGenres", userPreferences?.genres)
+                }
+            }
+            dialogFragment.setOnGenreSelectedListener(this)
+            dialogFragment.show(parentFragmentManager, "GenreSelector")
+        }
+
+        viewModel.userPreferences.observe(viewLifecycleOwner){
+            preferencesField.text = "Любимые жанры: ${it?.genres}"
         }
         return view
+    }
+
+    override fun onGenresSelected(selectedGenres: Set<Genre>) {
+        viewModel.updateSelectedGenres(selectedGenres)
+        viewModel.getUserPreferences()
     }
 }

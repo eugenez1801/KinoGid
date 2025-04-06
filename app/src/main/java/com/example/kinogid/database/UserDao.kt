@@ -2,8 +2,10 @@ package com.example.kinogid.database
 
 import androidx.room.Dao
 import androidx.room.Insert
+import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.kinogid.User
+import com.example.kinogid.UserPreferences
 import java.util.UUID
 
 @Dao
@@ -22,4 +24,10 @@ interface UserDao {
 
     @Query("SELECT * FROM user WHERE login = :login AND password = :password")
     suspend fun getUserByLoginAndPassword(login: String, password: String): User?
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)//замена, если UUID одинаковый
+    suspend fun savePreferences(preferences: UserPreferences)
+
+    @Query("SELECT * FROM UserPreferences WHERE userId = (:userId)")
+    suspend fun getPreferences(userId: UUID): UserPreferences?
 }

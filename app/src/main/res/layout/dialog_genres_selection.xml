@@ -322,4 +322,38 @@
         android:layout_marginTop="40dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/thriller_chip"/>
+
+    <android.widget.Button
+        android:id="@+id/cancel_button"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/war_chip"
+
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="50dp"
+
+        android:text="Отменить"
+        android:textAppearance="@style/TextAppearance.PTSerifCaption.ButtonText"
+        android:textSize="16sp"
+        android:background="@drawable/shape_rounded"
+        android:backgroundTint="@color/buttonColor"
+        android:textColor="@color/buttonTextColor"/>
+
+    <android.widget.Button
+        android:id="@+id/save_button"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/western_chip"
+
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="50dp"
+
+        android:text="Сохранить"
+        android:textAppearance="@style/TextAppearance.PTSerifCaption.ButtonText"
+        android:textSize="16sp"
+        android:background="@drawable/shape_rounded"
+        android:backgroundTint="@color/primaryColor"
+        android:textColor="@color/black"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

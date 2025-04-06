@@ -32,4 +32,13 @@ class UserRepository(private val userDao: UserDao) {
     suspend fun authenticate(login: String, password: String): User?{
         return userDao.getUserByLoginAndPassword(login, password)
     }
+
+    suspend fun saveUserPreferences(preferences: UserPreferences){
+        return userDao.savePreferences(preferences)
+    }
+
+    suspend fun getUserPreferences(userId: UUID): UserPreferences?{/*тут обязательно ? нужен,
+    поскольку при первом запуске у нового пользователя не существует своих UserPreferences*/
+        return userDao.getPreferences(userId)
+    }
 }
