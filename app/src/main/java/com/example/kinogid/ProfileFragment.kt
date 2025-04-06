@@ -39,13 +39,43 @@ class ProfileFragment: Fragment(), GenreSelectorDialogFragment.OnGenresSelectedL
         }
 
         viewModel.userPreferences.observe(viewLifecycleOwner){
-            preferencesField.text = "Любимые жанры: ${it?.genres}"
+            /*val preferenceFieldText = if (it == null) "Любимых жанров пока нет"
+            else normalizeGenres(it.genres) сделал все это в самом методе
+            preferencesField.text = preferenceFieldText*/
+            preferencesField.text = createPreferencesText(it?.genres)
+
         }
         return view
     }
 
+    fun createPreferencesText(genres: String?): String{
+        if (genres == null) return "Любимых жанров пока нет"
+        var result = "Любимые жанры: "
+        if("ACTION" in genres) result += "${Genre.ACTION.displayingGenre}, "
+        if("ADVENTURE" in genres) result += "${Genre.ADVENTURE.displayingGenre}, "
+        if("ANIMATION" in genres) result += "${Genre.ANIMATION.displayingGenre}, "
+        if("BIOGRAPHY" in genres) result += "${Genre.BIOGRAPHY.displayingGenre}, "
+        if("COMEDY" in genres) result += "${Genre.COMEDY.displayingGenre}, "
+        if("CRIME" in genres) result += "${Genre.CRIME.displayingGenre}, "
+        if("DOCUMENTARY" in genres) result += "${Genre.DOCUMENTARY.displayingGenre}, "
+        if("DRAMA" in genres) result += "${Genre.DRAMA.displayingGenre}, "
+        if("FAMILY" in genres) result += "${Genre.FAMILY.displayingGenre}, "
+        if("FANTASY" in genres) result += "${Genre.FANTASY.displayingGenre}, "
+        if("HORROR" in genres) result += "${Genre.HORROR.displayingGenre}, "
+        if("MUSICAL" in genres) result += "${Genre.MUSICAL.displayingGenre}, "
+        if("MYSTERY" in genres) result += "${Genre.MYSTERY.displayingGenre}, "
+        if("ROMANCE" in genres) result += "${Genre.ROMANCE.displayingGenre}, "
+        if("SCI_FI" in genres) result += "${Genre.SCI_FI.displayingGenre}, "
+        if("SPORT" in genres) result += "${Genre.SPORT.displayingGenre}, "
+        if("SUPERHERO" in genres)result += "${Genre.SUPERHERO.displayingGenre}, "
+        if("THRILLER" in genres) result += "${Genre.THRILLER.displayingGenre}, "
+        if("WAR" in genres) result += "${Genre.WAR.displayingGenre}, "
+        if("WESTERN" in genres) result += "${Genre.WESTERN.displayingGenre}, "
+        result = result.removeSuffix(", ") + "."
+        return result
+    }
+
     override fun onGenresSelected(selectedGenres: Set<Genre>) {
         viewModel.updateSelectedGenres(selectedGenres)
-        viewModel.getUserPreferences()
     }
 }

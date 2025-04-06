@@ -37,6 +37,9 @@ class MainViewModel(private val userRepository: UserRepository): ViewModel() {
                 )
             }
             userRepository.saveUserPreferences(userPreferences!!)
+            getUserPreferences()
+            /*val newUserPreferences = userRepository.getUserPreferences(user.value!!.id)//теперь берется из ViewModel id
+            _userPrefences.postValue(newUserPreferences)*/
         }
     }
 }
