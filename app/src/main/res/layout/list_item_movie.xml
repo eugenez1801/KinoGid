@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linearLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/primaryColor">
+
+    <TextView
+        android:id="@+id/movie_title"
+        style="@style/TextAppearance.PTSerif.MovieField"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Побег из Шоушенка" />
+
+    <TextView
+        android:id="@+id/year"
+        style="@style/TextAppearance.PTSerifCaption.MovieInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_marginStart="5dp"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/movie_title"
+        tools:text="1994" />
+
+    <TextView
+        android:id="@+id/duration"
+        style="@style/TextAppearance.PTSerifCaption.MovieInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_marginStart="25dp"
+
+        app:layout_constraintStart_toEndOf="@+id/year"
+        app:layout_constraintTop_toBottomOf="@+id/movie_title"
+        tools:text="2h 22m"/>
+
+    <TextView
+        android:id="@+id/age_rating"
+        style="@style/TextAppearance.PTSerifCaption.MovieInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_marginStart="25dp"
+
+        app:layout_constraintStart_toEndOf="@+id/duration"
+        app:layout_constraintTop_toBottomOf="@+id/movie_title"
+        tools:text="16+"/>
+
+    <TextView
+        android:id="@+id/imdb_rating"
+        style="@style/TextAppearance.PTSerifCaption.MovieInfo"
+        android:textSize="15sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_marginStart="5dp"
+
+        android:drawablePadding="3dp"
+        android:gravity="bottom"
+        app:drawableStartCompat="@drawable/ic_yellow_star"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/year"
+        tools:text="9.3" />
+
+    <TextView
+        android:id="@+id/kinopoisk_rating"
+        style="@style/TextAppearance.PTSerifCaption.MovieInfo"
+        android:textSize="15sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_marginStart="60dp"
+
+        android:drawablePadding="3dp"
+        android:gravity="bottom"
+        app:drawableStartCompat="@drawable/ic_orange_star"
+
+        app:layout_constraintStart_toStartOf="@id/imdb_rating"
+        app:layout_constraintTop_toBottomOf="@id/year"
+        tools:text="9.1" />
+
+    <TextView
+        android:id="@+id/genres"
+        style="@style/TextAppearance.PTSerifCaption.MovieInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_marginStart="5dp"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imdb_rating"
+        tools:text="Драма, Криминал" />
+</androidx.constraintlayout.widget.ConstraintLayout>

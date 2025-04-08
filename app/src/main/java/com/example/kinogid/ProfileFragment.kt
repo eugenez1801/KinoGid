@@ -39,9 +39,6 @@ class ProfileFragment: Fragment(), GenreSelectorDialogFragment.OnGenresSelectedL
         }
 
         viewModel.userPreferences.observe(viewLifecycleOwner){
-            /*val preferenceFieldText = if (it == null) "Любимых жанров пока нет"
-            else normalizeGenres(it.genres) сделал все это в самом методе
-            preferencesField.text = preferenceFieldText*/
             preferencesField.text = createPreferencesText(it?.genres)
 
         }
@@ -49,7 +46,7 @@ class ProfileFragment: Fragment(), GenreSelectorDialogFragment.OnGenresSelectedL
     }
 
     fun createPreferencesText(genres: String?): String{
-        if (genres == null) return "Любимых жанров пока нет"
+        if (genres == null || genres == "") return "Любимых жанров пока нет"
         var result = "Любимые жанры: "
         if("ACTION" in genres) result += "${Genre.ACTION.displayingGenre}, "
         if("ADVENTURE" in genres) result += "${Genre.ADVENTURE.displayingGenre}, "

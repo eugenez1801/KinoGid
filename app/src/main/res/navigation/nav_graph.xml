@@ -12,7 +12,23 @@
         <action
             android:id="@+id/action_recommendationsFragment_to_profileFragment"
             app:destination="@id/menu_profile" />
+        <action
+            android:id="@+id/action_menu_recommendations_to_menu_search2"
+            app:destination="@id/menu_search" />
     </fragment>
+
+    <fragment
+        android:id="@+id/menu_search"
+        android:name="com.example.kinogid.SearchFragment"
+        android:label="fragment_search" >
+        <action
+            android:id="@+id/action_menu_search_to_menu_profile"
+            app:destination="@id/menu_profile" />
+        <action
+            android:id="@+id/action_menu_search_to_menu_recommendations2"
+            app:destination="@id/menu_recommendations" />
+    </fragment>
+
     <fragment
         android:id="@+id/menu_profile"
         android:name="com.example.kinogid.ProfileFragment"
@@ -20,5 +36,8 @@
         <action
             android:id="@+id/action_profileFragment_to_recommendationsFragment"
             app:destination="@id/menu_recommendations" />
+        <action
+            android:id="@+id/action_menu_profile_to_menu_search"
+            app:destination="@id/menu_search" />
     </fragment>
 </navigation>
