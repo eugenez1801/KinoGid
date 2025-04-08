@@ -65,7 +65,7 @@ object MovieCatalog{
         Movie(13, "Начало", 2010, 148, "12+",
             setOf(Genre.ACTION, Genre.SCI_FI,Genre.THRILLER), 8.8f, 8.7f, "Пусто"),
 
-        Movie(14, "Звёздные войны: Эпизод 5 - Империя наносит ответный удар", 1980, 124, "0+",
+        Movie(14, "Звездные войны: Эпизод 5 - Империя наносит ответный удар", 1980, 124, "0+",
             setOf(Genre.ACTION, Genre.ADVENTURE, Genre.SCI_FI), 8.7f, 8.1f, "Пусто"),
 
         Movie(15, "Матрица", 1999, 136, "16+",
@@ -98,7 +98,7 @@ object MovieCatalog{
         Movie(24, "Город Бога", 2002, 130, "16+",
             setOf(Genre.CRIME, Genre.DRAMA), 8.6f, 8.0f, "Пусто"),
 
-        Movie(25, "Зелёная миля", 1999, 189, "14+",
+        Movie(25, "Зеленая миля", 1999, 189, "14+",
             setOf(Genre.CRIME, Genre.DRAMA, Genre.FANTASY, Genre.MYSTERY), 8.6f, 9.1f, "Пусто"),
 
         Movie(26, "Жизнь прекрасна", 1997, 116, "0+",
@@ -113,7 +113,7 @@ object MovieCatalog{
         Movie(29, "Назад в будущее", 1985, 116, "12+",
             setOf(Genre.COMEDY, Genre.ADVENTURE, Genre.SCI_FI), 8.5f, 8.6f, "Пусто"),
 
-        Movie(30, "Унесённые призраками", 2001, 124, "12+",
+        Movie(30, "Унесенные призраками", 2001, 124, "12+",
             setOf(Genre.ANIMATION, Genre.ADVENTURE, Genre.FAMILY, Genre.FANTASY), 8.6f, 8.5f, "Пусто"),
 
         Movie(31, "Пианист", 2002, 150, "16+",
