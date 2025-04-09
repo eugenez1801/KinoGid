@@ -6,7 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
 import android.widget.TextView
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kinogid.movies.Genre
@@ -53,6 +55,10 @@ class SearchFragment: Fragment() {
         val kinopoiskRatingTextView: TextView = itemView.findViewById(R.id.kinopoisk_rating)
         val genresTextView: TextView = itemView.findViewById(R.id.genres)
 
+        init {
+            itemView.setOnClickListener(this)
+        }
+
         fun bind(movie: Movie){
             this.movie = movie
             titleTextView.text = movie.title
@@ -65,7 +71,9 @@ class SearchFragment: Fragment() {
         }
 
         override fun onClick(v: View?) {
-            TODO("Not yet implemented")
+            val movieId = movie.id
+            val bundle = bundleOf("movieId" to movieId)
+            findNavController().navigate(R.id.action_menu_search_to_movieFragment, bundle)
         }
     }
 

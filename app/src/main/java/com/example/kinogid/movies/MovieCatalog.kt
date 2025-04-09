@@ -22,7 +22,7 @@ object MovieCatalog{
     val warGenre = Genre.WAR.displayingGenre
     val westernGenre = Genre.WESTERN.displayingGenre*/
     val movieList = listOf(
-        Movie(0, "Побег из Шоушенка", 1994, 144, "16+",
+        Movie(0, "Побег из Шоушенка", 1994, 142, "16+",
             setOf(Genre.CRIME, Genre.DRAMA), 9.3f, 9.1f, "Пусто"),
 
         Movie(1, "Крестный отец", 1972, 175, "16+",

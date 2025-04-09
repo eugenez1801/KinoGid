@@ -27,6 +27,9 @@
         <action
             android:id="@+id/action_menu_search_to_menu_recommendations2"
             app:destination="@id/menu_recommendations" />
+        <action
+            android:id="@+id/action_menu_search_to_movieFragment"
+            app:destination="@id/movieFragment" />
     </fragment>
 
     <fragment
@@ -39,5 +42,14 @@
         <action
             android:id="@+id/action_menu_profile_to_menu_search"
             app:destination="@id/menu_search" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/movieFragment"
+        android:name="com.example.kinogid.MovieFragment"
+        android:label="fragment_movie" >
+        <argument
+            android:name="movieId"
+            app:argType="integer"/>
     </fragment>
 </navigation>
