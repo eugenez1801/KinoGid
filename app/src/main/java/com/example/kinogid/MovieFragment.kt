@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.view.isGone
 import androidx.fragment.app.Fragment
@@ -29,6 +30,8 @@ class MovieFragment: Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         viewModel = ViewModelProvider(requireActivity())[MainViewModel::class.java]
+        val user = viewModel.user.value!!
+
         val view = inflater.inflate(R.layout.fragment_movie, container, false)
 
         val titleTextView = view.findViewById<TextView>(R.id.movie_title).apply { text = movie.title }
@@ -75,6 +78,42 @@ class MovieFragment: Fragment() {
 
         Glide.with(this).load(movie.posterURL).placeholder(R.drawable.ic_load_placeholder)
             .into(moviePoster)
+
+        viewModel.getWatchedMovie(movie.id)//задаем значение для viewModel.watchedMovie
+        val watchedLinearLayout = view.findViewById<LinearLayout>(R.id.watched_field)
+        val watchedImageView = view.findViewById<ImageView>(R.id.watched_ic)/*.apply {
+            if (viewModel.watchedMovie.value == null) setBackgroundResource(R.drawable.ic_not_watched)
+            else setBackgroundResource(R.drawable.ic_watched) это было бессмысленно, поскольку
+            viewModel.getWatchedMovie(movie.id) не всегда успевало отработать, поэтому ввод данных
+            для watchedImageView и watchedTextView был выведен в watchedMovie.observe
+        }*/
+        val watchedTextView = view.findViewById<TextView>(R.id.watched_tv)/*.apply {
+            if (viewModel.watchedMovie.value == null) text = "Фильм еще не просмотрен"
+            else text = "Фильм просмотрен"
+        }*/
+        viewModel.watchedMovie.observe(viewLifecycleOwner){
+            watchedImageView.apply {
+                if (viewModel.watchedMovie.value == null) setBackgroundResource(R.drawable.ic_not_watched)
+                else setBackgroundResource(R.drawable.ic_watched)
+            }
+            watchedTextView.apply {
+                if (viewModel.watchedMovie.value == null) text = "Фильм еще не просмотрен"
+                else text = "Фильм просмотрен"
+            }
+        }
+
+        watchedLinearLayout.setOnClickListener{
+            viewModel.updateStatusWatchedMovie(movie.id){ resultCode ->
+                if (resultCode == 1){
+                    watchedImageView.setBackgroundResource(R.drawable.ic_watched)
+                    watchedTextView.text = "Фильм просмотрен"
+                }
+                else {
+                    watchedImageView.setBackgroundResource(R.drawable.ic_not_watched)
+                    watchedTextView.text = "Фильм еще не просмотрен"
+                }
+            }
+        }
         return view
     }
 

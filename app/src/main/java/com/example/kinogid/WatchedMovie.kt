@@ -12,7 +12,7 @@ import java.util.UUID
     onDelete = ForeignKey.CASCADE
     )]
 )
-data class WatchedMovies(
+data class WatchedMovie(
     @PrimaryKey val id: UUID = UUID.randomUUID(),
     val userId: UUID,
     val movieId: Int,

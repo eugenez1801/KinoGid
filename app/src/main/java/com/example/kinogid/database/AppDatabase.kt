@@ -5,9 +5,9 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.example.kinogid.User
 import com.example.kinogid.UserPreferences
-import com.example.kinogid.WatchedMovies
+import com.example.kinogid.WatchedMovie
 
-@Database(entities = [ User::class, WatchedMovies::class, UserPreferences::class ], version=1)
+@Database(entities = [ User::class, WatchedMovie::class, UserPreferences::class ], version=1)
 @TypeConverters(UserTypeConverters::class)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun userDao(): UserDao

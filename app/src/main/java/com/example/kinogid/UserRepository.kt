@@ -41,4 +41,21 @@ class UserRepository(private val userDao: UserDao) {
     поскольку при первом запуске у нового пользователя не существует своих UserPreferences*/
         return userDao.getPreferences(userId)
     }
+
+    suspend fun makeMovieIsWatched(watchedMovie: WatchedMovie){
+        return userDao.makeMovieIsWatched(watchedMovie)
+    }
+
+    suspend fun getWatchedMovie(userId: UUID, movieId: Int): WatchedMovie?{
+        return userDao.getWatchedMovie(userId, movieId)
+    }
+
+    suspend fun deleteWatchedMovie(userId: UUID, movieId: Int){
+        return userDao.deleteWatchedMovie(userId, movieId)
+    }
+
+    /*suspend fun updateStatusWatchedMovie(userId: UUID, movieId: Int){ не пригодилось,
+    или не додумал (минуты 3 думал всего)
+        if (userDao.getWatchedMovie(userId, movieId) != null) userDao.makeMovieIsWatched()
+    }*/
 }

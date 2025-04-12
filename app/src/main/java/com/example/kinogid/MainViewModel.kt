@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.kinogid.movies.Genre
 import kotlinx.coroutines.launch
+import java.util.UUID
 
 class MainViewModel(private val userRepository: UserRepository): ViewModel() {
     val _user = MutableLiveData<User?>()
@@ -40,6 +41,36 @@ class MainViewModel(private val userRepository: UserRepository): ViewModel() {
             getUserPreferences()
             /*val newUserPreferences = userRepository.getUserPreferences(user.value!!.id)//теперь берется из ViewModel id
             _userPrefences.postValue(newUserPreferences)*/
+        }
+    }
+
+    val _watchedMovie = MutableLiveData<WatchedMovie?>()
+    val watchedMovie: LiveData<WatchedMovie?> get() = _watchedMovie
+    fun getWatchedMovie(movieId: Int){ //нужен для начальной инициализации полей во фрагменте с деталями фильма
+        viewModelScope.launch {
+            val watchedMovie = userRepository.getWatchedMovie(user.value!!.id, movieId)
+            _watchedMovie.postValue(watchedMovie)
+        }
+    }
+
+    fun updateStatusWatchedMovie(movieId: Int, onResult: (Int) -> Unit){
+        /*РЕЗУЛЬТИРУЮЩИЕ КОДЫ:
+        * 1 - фильм был добавлен в список просмотренных
+        * 2 - фильм был удален из списка просмотренных*/
+        viewModelScope.launch {
+            if (userRepository.getWatchedMovie(user.value!!.id, movieId) == null) {
+                val watchedMovie = WatchedMovie(
+                    userId = user.value!!.id,
+                    movieId = movieId,
+                    rating = null)
+                userRepository.makeMovieIsWatched(watchedMovie)
+                onResult(1)
+            }
+            else{
+                userRepository.deleteWatchedMovie(user.value!!.id, movieId)
+                onResult(2)
+            }
+            getWatchedMovie(movieId)
         }
     }
 }
