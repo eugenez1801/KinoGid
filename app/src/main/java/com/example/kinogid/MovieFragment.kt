@@ -37,7 +37,7 @@ class MovieFragment: Fragment() {
             text = normalizeGenresDetail(movie.genres)
         }
 
-        val moviePoster = view.findViewById<ImageView>(R.id.moviePoster)
+        val moviePoster = view.findViewById<ImageView>(R.id.movie_poster)
 
         val yearTextView = view.findViewById<TextView>(R.id.year_tv).apply {
             text = movie.year.toString()

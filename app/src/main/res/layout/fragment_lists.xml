@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/backgroundColor">
+
+    <TextView
+        android:id="@+id/lists"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+
+        android:text="Мои списки"
+
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="44dp"
+
+        style="@style/TextAppearance.PTSerifCaption.SecondarySubTitle"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/watched_movies_list"
+        android:layout_width="match_parent"
+        android:layout_height="190dp"
+        android:orientation="vertical"
+
+        android:layout_marginTop="13dp"
+        android:layout_marginEnd="14dp"
+        android:layout_marginStart="14dp"
+
+        android:background="@color/primaryColor"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lists">
+
+        <TextView
+            android:id="@+id/list_name"
+            style="@style/TextAppearance.PTSerif.ListsMovieFields"
+            android:textColor="@color/secondaryColor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_marginStart="6dp"
+
+            android:text="Просмотренные фильмы"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_open_list"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+
+            android:layout_marginStart="6dp"
+            android:layout_marginEnd="6dp"
+            android:layout_marginTop="6dp"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/list_name">
+
+            <ImageView
+                android:id="@+id/first_movie_poster"
+                android:layout_width="89dp"
+                android:layout_height="wrap_content"
+
+                android:adjustViewBounds="true"
+                android:maxHeight="300dp"
+                android:scaleType="fitCenter"
+
+                app:layout_constraintDimensionRatio="H,2:3"
+
+                tools:src="@drawable/placeholder_poster" />
+
+            <Space
+                android:layout_width="5dp"
+                android:layout_height="0dp"/>
+
+            <ImageView
+                android:id="@+id/second_movie_poster"
+                android:layout_width="89dp"
+                android:layout_height="wrap_content"
+
+                android:adjustViewBounds="true"
+                android:maxHeight="300dp"
+                android:scaleType="fitCenter"
+
+                app:layout_constraintDimensionRatio="H,2:3"
+
+                tools:src="@drawable/placeholder_poster" />
+
+            <Space
+                android:layout_width="5dp"
+                android:layout_height="0dp"/>
+
+            <ImageView
+                android:id="@+id/third_movie_poster"
+                android:layout_width="89dp"
+                android:layout_height="wrap_content"
+
+                android:adjustViewBounds="true"
+                android:maxHeight="300dp"
+                android:scaleType="fitCenter"
+
+                app:layout_constraintDimensionRatio="H,2:3"
+
+                tools:src="@drawable/placeholder_poster" />
+
+            <Space
+                android:layout_width="5dp"
+                android:layout_height="0dp"/>
+
+            <ImageView
+                android:id="@+id/fourth_movie_poster"
+                android:layout_width="89dp"
+                android:layout_height="wrap_content"
+
+                android:adjustViewBounds="true"
+                android:maxHeight="300dp"
+                android:scaleType="fitCenter"
+
+                app:layout_constraintDimensionRatio="H,2:3"
+
+                tools:src="@drawable/placeholder_poster" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/count_tv"
+            style="@style/TextAppearance.PTSerifCaption.MovieInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_marginStart="6dp"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:text="Общее количество: 12" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

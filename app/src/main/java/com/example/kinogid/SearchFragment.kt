@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.SearchView
 import android.widget.TextView
 import androidx.core.os.bundleOf
@@ -11,6 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.kinogid.movies.Movie
 import com.example.kinogid.movies.MovieCatalog
 
@@ -53,6 +55,7 @@ class SearchFragment: Fragment() {
         val imdbRatingTextView: TextView = itemView.findViewById(R.id.imdb_rating)
         val kinopoiskRatingTextView: TextView = itemView.findViewById(R.id.kinopoisk_rating)
         val genresTextView: TextView = itemView.findViewById(R.id.genres)
+        val moviePoster = view.findViewById<ImageView>(R.id.movie_poster)
 
         init {
             itemView.setOnClickListener(this)
@@ -67,6 +70,8 @@ class SearchFragment: Fragment() {
             imdbRatingTextView.text = movie.rateIMDB.toString()
             kinopoiskRatingTextView.text = movie.rateKinopoisk.toString()
             genresTextView.text = normalizeGenres(movie.genres)
+            Glide.with(this@SearchFragment).load(movie.posterURL).placeholder(R.drawable.ic_load_placeholder)
+                .into(moviePoster)
         }
 
         override fun onClick(v: View?) {

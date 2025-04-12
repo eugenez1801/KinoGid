@@ -27,6 +27,10 @@
         <item name="android:textColor">@color/secondaryColor</item>
         <item name="android:textSize">22sp</item>
     </style>
+    <style name="TextAppearance.PTSerif.ListsMovieFields">
+        <item name="android:textColor">@color/secondaryColor</item>
+        <item name="android:textSize">22sp</item>
+    </style>
 
     <style name="TextAppearance.PTSerifCaption">
         <item name="android:fontFamily">@font/pt_serif_caption_regular</item>

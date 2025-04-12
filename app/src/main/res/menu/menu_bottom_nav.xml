@@ -12,7 +12,13 @@
         android:title="Поиск"
         android:icon="@drawable/ic_search"
         android:id="@+id/menu_search"
-        app:destination="@id/menu_recommendations"/>
+        app:destination="@id/menu_search"/>
+
+    <item
+        android:title="Мои списки"
+        android:icon="@drawable/ic_lists"
+        android:id="@+id/menu_lists"
+        app:destination="@id/menu_lists"/>
 
     <item
         android:title="Мой профиль"

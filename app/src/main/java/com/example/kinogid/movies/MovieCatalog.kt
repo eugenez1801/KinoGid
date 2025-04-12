@@ -85,7 +85,7 @@ object MovieCatalog{
             setOf(Genre.ACTION, Genre.SCI_FI, Genre.THRILLER), 8.8f, 8.7f, "Пусто",
             "https://m.media-amazon.com/images/M/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_FMjpg_UY3000_.jpg", 4, 0),
 
-        Movie(14, "Звездные войны: Эпизод 5 – Империя наносит ответный удар", 1980, 124, "0+",
+        Movie(14, "Звездные войны: Эпизод 5 – Империя наносит ответный удар", 1980, 124, "12+",
             setOf(Genre.ACTION, Genre.ADVENTURE, Genre.SCI_FI), 8.7f, 8.1f, "Пусто",
             "https://m.media-amazon.com/images/M/MV5BYmU1NDRjNDgtMzhiMi00NjZmLTg5NGItZDNiZjU5NTU4OTE0XkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_FMjpg_UY3000_.jpg", 2, 0),
 
@@ -133,7 +133,7 @@ object MovieCatalog{
             setOf(Genre.CRIME, Genre.DRAMA, Genre.FANTASY, Genre.MYSTERY), 8.6f, 9.1f, "Пусто",
             "https://m.media-amazon.com/images/M/MV5BMTUxMzQyNjA5MF5BMl5BanBnXkFtZTYwOTU2NTY3._V1_.jpg"),
 
-        Movie(26, "Жизнь прекрасна", 1997, 116, "0+",
+        Movie(26, "Жизнь прекрасна", 1997, 116, "12+",
             setOf(Genre.COMEDY, Genre.DRAMA, Genre.ROMANCE, Genre.WAR), 8.6f, 8.6f, "Пусто",
             "https://m.media-amazon.com/images/M/MV5BYmJmM2Q4NmMtYThmNC00ZjRlLWEyZmItZTIwOTBlZDQ3NTQ1XkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_FMjpg_UY3000_.jpg", 3, 0),
 
@@ -141,7 +141,7 @@ object MovieCatalog{
             setOf(Genre.ACTION, Genre.ADVENTURE, Genre.SCI_FI), 8.6f, 8.4f, "Пусто",
             "https://m.media-amazon.com/images/M/MV5BMGU2NzRmZjUtOGUxYS00ZjdjLWEwZWItY2NlM2JhNjkxNTFmXkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_FMjpg_UY3000_.jpg", 4, 0),
 
-        Movie(28, "Звездные войны: Эпизод 4 – Новая надежда", 1977, 121, "0+",
+        Movie(28, "Звездные войны: Эпизод 4 – Новая надежда", 1977, 121, "12+",
             setOf(Genre.ACTION, Genre.ADVENTURE, Genre.SCI_FI), 8.6f, 8.1f, "Пусто",
             "https://m.media-amazon.com/images/M/MV5BOTA5NjhiOTAtZWM0ZC00MWNhLThiMzEtZDFkOTk2OTU1ZDJkXkEyXkFqcGdeQXVyMTA4NDI1NTQx._V1_FMjpg_UY3000_.jpg", 7, 1),
 

@@ -15,6 +15,9 @@
         <action
             android:id="@+id/action_menu_recommendations_to_menu_search2"
             app:destination="@id/menu_search" />
+        <action
+            android:id="@+id/action_menu_recommendations_to_listsFragment"
+            app:destination="@id/menu_lists" />
     </fragment>
 
     <fragment
@@ -30,6 +33,24 @@
         <action
             android:id="@+id/action_menu_search_to_movieFragment"
             app:destination="@id/movieFragment" />
+        <action
+            android:id="@+id/action_menu_search_to_listsFragment"
+            app:destination="@id/menu_lists" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/menu_lists"
+        android:name="com.example.kinogid.ListsFragment"
+        android:label="fragment_lists" >
+        <action
+            android:id="@+id/action_listsFragment_to_menu_recommendations"
+            app:destination="@id/menu_recommendations" />
+        <action
+            android:id="@+id/action_listsFragment_to_menu_profile"
+            app:destination="@id/menu_profile" />
+        <action
+            android:id="@+id/action_listsFragment_to_menu_search"
+            app:destination="@id/menu_search" />
     </fragment>
 
     <fragment
@@ -42,6 +63,9 @@
         <action
             android:id="@+id/action_menu_profile_to_menu_search"
             app:destination="@id/menu_search" />
+        <action
+            android:id="@+id/action_menu_profile_to_listsFragment"
+            app:destination="@id/menu_lists" />
     </fragment>
 
     <fragment
@@ -52,4 +76,5 @@
             android:name="movieId"
             app:argType="integer"/>
     </fragment>
+
 </navigation>
