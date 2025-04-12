@@ -4,6 +4,7 @@ import ViewModelFactory
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
@@ -35,7 +36,7 @@ class MainActivity : AppCompatActivity() {
 
         val factory = ViewModelFactory(userRepository)
         viewModel = ViewModelProvider(this, factory)[MainViewModel::class.java]
-
+        val bottomNav = findViewById<BottomNavigationView>(R.id.bottom_nav)
         val userLogin = intent.getStringExtra(LOGIN_OF_USER)!!
         viewModel.getUserByLogin(userLogin)
         //запускаем фрагмент только после того, как user будет иметь значение
@@ -44,12 +45,16 @@ class MainActivity : AppCompatActivity() {
                 val navHostFragment = supportFragmentManager
                     .findFragmentById(R.id.nav_host_fragment) as NavHostFragment
                 navController = navHostFragment.navController
-
                 navController.setGraph(R.navigation.nav_graph)
-
-                val bottomNav = findViewById<BottomNavigationView>(R.id.bottom_nav)
                 bottomNav.setupWithNavController(navController)
 
+                navController.addOnDestinationChangedListener { _, destination, _ ->
+                    if(destination.id == R.id.movieFragment) {
+                        bottomNav.visibility = View.GONE
+                    } else {
+                        bottomNav.visibility = View.VISIBLE
+                    }
+                }
             }
         }
     }

@@ -54,5 +54,13 @@
         <item name="android:textSize">16sp</item>
         <item name="android:textColor">@color/secondaryColor</item>
     </style>
+    <style name="TextAppearance.PTSerifCaption.BottomPanel">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/secondaryColor</item>
+    </style>
+    <style name="TextAppearance.PTSerifCaption.MovieDetails">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/primaryColor</item>
+    </style>
 
 </resources>

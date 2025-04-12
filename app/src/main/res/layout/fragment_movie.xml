@@ -7,51 +7,242 @@
     android:background="@color/backgroundColor">
 
     <TextView
-        android:id="@+id/selected_movie_info"
+        android:id="@+id/movie_title"
+        style="@style/TextAppearance.PTSerif.ProfileAndMovieFields"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="14dp"
+        android:layout_marginEnd="14dp"
+
+        android:layout_marginTop="40dp"
+
+        android:background="@color/primaryColor"
+        android:gravity="center"
+
+        android:minHeight="40dp"
+        android:paddingStart="7dp"
+
+        android:paddingEnd="7dp"
+        app:layout_constraintStart_toStartOf="parent"
+
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Побег из Шоушенка" />
+
+    <TextView
+        android:id="@+id/movie_genres"
+        style="@style/TextAppearance.PTSerifCaption.MovieDetails"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
+        android:textSize="18sp"
+        android:gravity="center"
+
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/movie_title"
+        tools:text="Криминал    Драма" />
 
-        tools:text="Информация о выбранном фильме"
+    <LinearLayout
+        android:id="@+id/year"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
 
-        android:layout_marginStart="14dp"
-        android:layout_marginEnd="14dp"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="30dp"
 
-        style="@style/TextAppearance.PTSerifCaption.SecondarySubTitle"/>
-
-    <TextView
-        android:id="@+id/movie_title"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-
+        app:layout_constraintEnd_toStartOf="@+id/moviePoster"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/selected_movie_info"
+        app:layout_constraintTop_toBottomOf="@+id/movie_genres">
 
-        tools:text="Название: Побег из Шоушенка"
-        android:gravity="center_vertical"
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_year"
+            android:layout_gravity="center"/>
 
-        android:layout_marginStart="14dp"
-        android:layout_marginEnd="14dp"
+        <TextView
+            android:id="@+id/year_tv"
+            style="@style/TextAppearance.PTSerifCaption.MovieDetails"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_gravity="center"
+            tools:text="1994"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/duration"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+
         android:layout_marginTop="10dp"
 
-        android:paddingStart="7dp"
-        android:paddingEnd="7dp"
+        app:layout_constraintEnd_toStartOf="@+id/moviePoster"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/year">
 
-        android:background="@color/primaryColor"
-        style="@style/TextAppearance.PTSerif.ProfileAndMovieFields"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_duration" />
+
+        <TextView
+            android:id="@+id/duration_tv"
+            style="@style/TextAppearance.PTSerifCaption.MovieDetails"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_gravity="center"
+            tools:text="2 ч 22 мин" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/age_rating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+
+        android:layout_marginTop="10dp"
+
+        app:layout_constraintEnd_toStartOf="@+id/moviePoster"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/duration">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_age_rating" />
+
+        <TextView
+            android:id="@+id/age_rating_tv"
+            style="@style/TextAppearance.PTSerifCaption.MovieDetails"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_gravity="center"
+            tools:text="16+" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ratings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+
+        android:layout_marginTop="15dp"
+
+        app:layout_constraintEnd_toStartOf="@+id/moviePoster"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/age_rating">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_rating_list" />
+
+        <TextView
+            android:id="@+id/imdb_rating_tv"
+            style="@style/TextAppearance.PTSerifCaption.MovieDetails"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:drawablePadding="3dp"
+
+            android:layout_marginBottom="5dp"
+
+            android:gravity="bottom"
+            android:layout_gravity="bottom"
+            app:drawableStartCompat="@drawable/ic_yellow_star"
+            tools:text="9.3" />
+
+        <TextView
+            android:id="@+id/kinopoisk_rating_tv"
+            style="@style/TextAppearance.PTSerifCaption.MovieDetails"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:drawablePadding="3dp"
+
+            android:gravity="bottom"
+            app:drawableStartCompat="@drawable/ic_orange_star"
+            tools:text="9.1" />
+
+    </LinearLayout>
 
     <ImageView
         android:id="@+id/moviePoster"
-        android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:scaleType="centerCrop"
+        android:layout_width="200dp"
+        android:layout_height="0dp"
+
+        android:layout_marginTop="10dp"
+        android:adjustViewBounds="true"
+        android:maxHeight="300dp"
+        android:scaleType="fitCenter"
+
+        tools:src="@drawable/placeholder_poster"
+
+        app:layout_constraintDimensionRatio="H,2:3"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/movie_genres" />
+
+    <LinearLayout
+        android:id="@+id/rewards"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
 
         android:layout_marginTop="10dp"
 
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/movie_title" />
+        app:layout_constraintTop_toBottomOf="@+id/moviePoster">
+
+        <TextView
+            android:id="@+id/oscars_tv"
+            style="@style/TextAppearance.PTSerifCaption.MovieDetails"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            app:drawableStartCompat="@drawable/ic_oscar"
+            tools:text="7x"
+
+            android:layout_marginEnd="50dp"
+
+            android:gravity="center"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/globes_tv"
+            style="@style/TextAppearance.PTSerifCaption.MovieDetails"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            app:drawableEndCompat="@drawable/ic_globe"
+            tools:text="2x"
+
+            android:gravity="center"
+            android:textSize="18sp" />
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:gravity="center"
+
+        android:background="@color/primaryColor"
+
+        android:text="Информация о выбранном фильме"
+        style="@style/TextAppearance.PTSerifCaption.BottomPanel"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
