@@ -1,5 +1,7 @@
 package com.example.kinogid
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
@@ -23,6 +25,15 @@ class AuthViewModel(private val userRepository: UserRepository): ViewModel() {
         viewModelScope.launch {
             if (userRepository.authenticate(login, password) != null) onResult(true)
             else onResult(false)
+        }
+    }
+
+    val _user = MutableLiveData<User?>()
+    val user: LiveData<User?> get() = _user
+    fun getUserByLogin(login: String){
+        viewModelScope.launch {
+            val user = userRepository.getUserByLogin(login)
+            _user.postValue(user)
         }
     }
 }

@@ -62,4 +62,5 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
     implementation("androidx.room:room-ktx:2.6.1")
     implementation ("com.github.bumptech.glide:glide:4.16.0")
+    implementation ("androidx.datastore:datastore-preferences:1.1.4")
 }

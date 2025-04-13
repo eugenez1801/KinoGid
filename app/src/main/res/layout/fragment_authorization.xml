@@ -107,29 +107,44 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/password" />
 
+    <CheckBox
+        android:id="@+id/remember_me"
+        style="@style/TextAppearance.PTSerifCaption.AddText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="28dp"
+
+        android:text="Запомнить меня"
+        android:textColor="@color/buttonTextColor"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/enter_button" />
+
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="33dp"
-        android:layout_marginTop="6dp"
+        android:layout_marginTop="10dp"
         android:text="Еще нет аккаунта?"
         style="@style/TextAppearance.PTSerifCaption.AddText"
         android:textColor="#B6A19E"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/enter_button" />
+        app:layout_constraintTop_toBottomOf="@+id/remember_me" />
 
     <TextView
         android:id="@+id/registrationText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="6dp"
+        android:layout_marginTop="10dp"
         android:layout_marginStart="3dp"
         android:paddingBottom="15dp"
         android:text="Зарегистрируйтесь"
         style="@style/TextAppearance.PTSerifCaption.AddText"
         android:textColor="@color/buttonTextColor"
         app:layout_constraintStart_toEndOf="@+id/textView2"
-        app:layout_constraintTop_toBottomOf="@+id/enter_button" />
+        app:layout_constraintTop_toBottomOf="@+id/remember_me" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

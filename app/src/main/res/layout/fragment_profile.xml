@@ -20,6 +20,18 @@
 
         style="@style/TextAppearance.PTSerifCaption.SecondarySubTitle"/>
 
+    <ImageView
+        android:id="@+id/exit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_marginTop="44dp"
+        android:layout_marginStart="20dp"
+
+        android:src="@drawable/ic_exit"
+        app:layout_constraintStart_toEndOf="@+id/profile"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/name_field"
         android:layout_width="match_parent"
@@ -41,9 +53,9 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="110dp"
+        android:layout_marginStart="14dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="14dp"
-        android:layout_marginStart="14dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/name_field">
@@ -56,9 +68,9 @@
 
             android:background="@color/primaryColor"
             android:paddingStart="7dp"
+            android:paddingTop="3dp"
             android:paddingEnd="7dp"
             android:paddingBottom="7dp"
-            android:paddingTop="3dp"
             tools:text="Любимые жанры: Драма, Криминал" />
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
