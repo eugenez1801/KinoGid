@@ -155,7 +155,7 @@ object MovieCatalog{
 
         Movie(31, "Пианист", 2002, 150, "16+",
             setOf(Genre.BIOGRAPHY, Genre.DRAMA, Genre.WAR), 8.5f, 8.5f, "Пусто",
-            "https://m.media-amazon.com/images/M/MV5BOWRiZDIxZjktMTA1NC00MDQ2LWEzMjUtMTliZmY3NjQ3ODJiXkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_FMjpg_UY3000_.jpg", 3, 0),
+            "https://m.media-amazon.com/images/M/MV5BYjk4MWM2ZTAtMmEwNy00MDAzLWE1ZTQtMjJlNTUwNDhhMmNmXkEyXkFqcGc@._V1_.jpg", 3, 0),
 
         Movie(32, "Гладиатор", 2000, 155, "18+",
             setOf(Genre.ACTION, Genre.ADVENTURE, Genre.DRAMA), 8.5f, 8.6f, "Пусто",

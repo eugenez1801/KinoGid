@@ -40,4 +40,7 @@ interface UserDao {
 
     @Query("DELETE FROM WatchedMovie WHERE userId = :userId AND movieId = :movieId")
     suspend fun deleteWatchedMovie(userId: UUID, movieId: Int)
+
+    @Query("SELECT movieId FROM WatchedMovie WhERE userId = :userId")
+    suspend fun getListWatchedMovies(userId: UUID): List<Int>?
 }

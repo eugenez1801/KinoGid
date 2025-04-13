@@ -54,8 +54,7 @@ class UserRepository(private val userDao: UserDao) {
         return userDao.deleteWatchedMovie(userId, movieId)
     }
 
-    /*suspend fun updateStatusWatchedMovie(userId: UUID, movieId: Int){ не пригодилось,
-    или не додумал (минуты 3 думал всего)
-        if (userDao.getWatchedMovie(userId, movieId) != null) userDao.makeMovieIsWatched()
-    }*/
+    suspend fun getListWatchedMovies(userId: UUID): List<Int>?{
+        return userDao.getListWatchedMovies(userId)
+    }
 }

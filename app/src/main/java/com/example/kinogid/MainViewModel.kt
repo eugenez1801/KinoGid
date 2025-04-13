@@ -71,6 +71,16 @@ class MainViewModel(private val userRepository: UserRepository): ViewModel() {
                 onResult(2)
             }
             getWatchedMovie(movieId)
+            getListWatchedMovies()//обновляем список после изменений в этом методе
+        }
+    }
+
+    val _listWatchedMovies = MutableLiveData<List<Int>?>()
+    val listWatchedMovies: LiveData<List<Int>?> get() = _listWatchedMovies
+    fun getListWatchedMovies(){
+        viewModelScope.launch {
+            val listWatchedMovies = userRepository.getListWatchedMovies(user.value!!.id)
+            _listWatchedMovies.postValue(listWatchedMovies)
         }
     }
 }
