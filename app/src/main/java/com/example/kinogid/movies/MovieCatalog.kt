@@ -70,7 +70,7 @@ object MovieCatalog{
             "https://m.media-amazon.com/images/M/MV5BMWRlYTNlZDgtMmJhNC00MTMzLWFkOTktZmFhZDljMjNiNTg4XkEyXkFqcGc@._V1_.jpg"),
 
         Movie(10, "Форрест Гамп", 1994, 144, "18+",
-            setOf(Genre.DRAMA, Genre.ROMANCE), 8.8f, 8.9f, "Пусто",
+            setOf(Genre.DRAMA, Genre.ROMANCE, Genre.COMEDY), 8.8f, 8.9f, "Пусто",
             "https://m.media-amazon.com/images/M/MV5BNWIwODRlZTUtY2U3ZS00Yzg1LWJhNzYtMmZiYmEyNmU1NjMzXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_FMjpg_UY3000_.jpg", 6, 3),
 
         Movie(11, "Властелин колец: Две крепости", 2002, 179, "12+",

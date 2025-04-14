@@ -49,7 +49,7 @@ class MainActivity : AppCompatActivity() {
                 bottomNav.setupWithNavController(navController)
 
                 navController.addOnDestinationChangedListener { _, destination, _ ->
-                    if(destination.id == R.id.movieFragment) {
+                    if(destination.id == R.id.movieFragment || destination.id == R.id.detailListFragment) {
                         bottomNav.visibility = View.GONE
                     } else {
                         bottomNav.visibility = View.VISIBLE

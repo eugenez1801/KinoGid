@@ -51,6 +51,9 @@
         <action
             android:id="@+id/action_listsFragment_to_menu_search"
             app:destination="@id/menu_search" />
+        <action
+            android:id="@+id/action_menu_lists_to_detailListFragment"
+            app:destination="@id/detailListFragment" />
     </fragment>
 
     <fragment
@@ -75,6 +78,15 @@
         <argument
             android:name="movieId"
             app:argType="integer"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/detailListFragment"
+        android:name="com.example.kinogid.DetailListFragment"
+        android:label="fragment_detail_list" >
+        <action
+            android:id="@+id/action_detailListFragment_to_movieFragment"
+            app:destination="@id/movieFragment" />
     </fragment>
 
 </navigation>

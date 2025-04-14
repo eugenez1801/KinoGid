@@ -6,10 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.kinogid.movies.Movie
 import com.example.kinogid.movies.MovieCatalog
@@ -37,11 +39,17 @@ class ListsFragment: Fragment() {
         fourthImageView = view.findViewById(R.id.fourth_movie_poster)
         counterTextView = view.findViewById(R.id.count_tv)
         emptyListTextView = view.findViewById(R.id.empty_tv)
+        val watchedMovieList = view.findViewById<ConstraintLayout>(R.id.watched_movies_list)
 
         viewModel.getListWatchedMovies()
         viewModel.listWatchedMovies.observe(viewLifecycleOwner){ listOfMoviesId ->
             controlWatchedMoviesField(listOfMoviesId)//передаст null, если list == null
 //            Log.d("DEBUGSIZE", "В observe ${listOfMoviesId?.size.toString()}")
+        }
+
+        watchedMovieList.setOnClickListener{
+            if (viewModel.listWatchedMovies.value?.size != 0)
+                findNavController().navigate(R.id.action_menu_lists_to_detailListFragment)
         }
 
         return view
