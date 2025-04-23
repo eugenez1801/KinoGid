@@ -5,6 +5,10 @@ import java.util.UUID
 
 
 class UserRepository(private val userDao: UserDao) {
+    suspend fun isEmpty(): Boolean{
+        return userDao.isEmpty()
+    }
+
     fun getUser(id: UUID): User{ //LiveData<User?>
         return userDao.getUser(id)
     }
@@ -33,6 +37,7 @@ class UserRepository(private val userDao: UserDao) {
         return userDao.getUserByLoginAndPassword(login, password)
     }
 
+
     suspend fun saveUserPreferences(preferences: UserPreferences){
         return userDao.savePreferences(preferences)
     }
@@ -41,6 +46,7 @@ class UserRepository(private val userDao: UserDao) {
     поскольку при первом запуске у нового пользователя не существует своих UserPreferences*/
         return userDao.getPreferences(userId)
     }
+
 
     suspend fun makeMovieIsWatched(watchedMovie: WatchedMovie){
         return userDao.makeMovieIsWatched(watchedMovie)
@@ -56,5 +62,9 @@ class UserRepository(private val userDao: UserDao) {
 
     suspend fun getListWatchedMovies(userId: UUID): List<Int>?{
         return userDao.getListWatchedMovies(userId)
+    }
+
+    suspend fun addListOfMovies(listOfMovies: ListMovies){
+        return userDao.addListOfMovies(listOfMovies)
     }
 }

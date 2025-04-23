@@ -24,6 +24,7 @@ class ListsFragment: Fragment() {
     lateinit var fourthImageView: ImageView
     lateinit var counterTextView: TextView
     lateinit var emptyListTextView: TextView
+    lateinit var addListImageView: ImageView
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -39,6 +40,7 @@ class ListsFragment: Fragment() {
         fourthImageView = view.findViewById(R.id.fourth_movie_poster)
         counterTextView = view.findViewById(R.id.count_tv)
         emptyListTextView = view.findViewById(R.id.empty_tv)
+        addListImageView = view.findViewById(R.id.add_list)
         val watchedMovieList = view.findViewById<ConstraintLayout>(R.id.watched_movies_list)
 
         viewModel.getListWatchedMovies()
@@ -49,7 +51,11 @@ class ListsFragment: Fragment() {
 
         watchedMovieList.setOnClickListener{
             if (viewModel.listWatchedMovies.value?.size != 0)
-                findNavController().navigate(R.id.action_menu_lists_to_detailListFragment)
+                findNavController().navigate(R.id.action_menu_lists_to_detailWatchedListFragment)
+        }
+
+        addListImageView.setOnClickListener {
+            findNavController().navigate(R.id.action_menu_lists_to_detailListFragment)
         }
 
         return view

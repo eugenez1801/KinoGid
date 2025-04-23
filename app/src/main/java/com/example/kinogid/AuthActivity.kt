@@ -2,8 +2,11 @@ package com.example.kinogid
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import androidx.room.Room
+import com.example.kinogid.database.AppDatabase
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
@@ -11,6 +14,15 @@ class AuthActivity : AppCompatActivity() {
     private lateinit var preferencesManager: PreferencesManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        val database = Room.databaseBuilder(
+            this,
+            AppDatabase::class.java,
+            "app_database"
+        ).build()
+        val userDao = database.userDao()
+        val userRepository = UserRepository(userDao)
+        val viewModel = AuthViewModel(userRepository)
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_auth)
         preferencesManager = PreferencesManager(this)
@@ -37,8 +49,14 @@ class AuthActivity : AppCompatActivity() {
                     }
                 }
             }*/
+            val isTableEmpty = try {
+                viewModel.isEmpty() // Это suspend-функция, будет выполнена в фоне
+            } catch (e: Exception) {
+                true // В случае ошибки считаем таблицу пустой
+            }
             val rememberMe = preferencesManager.rememberMeFlow.first()//а это один раз проверить и все
-            if(rememberMe){
+            if(rememberMe && isTableEmpty){//не нужен ! у isTableEmpty
+                Log.d("RememberMe", "rememberMe == true")
                 val userLogin = preferencesManager.userLoginFlow.first()
                 if (!userLogin.isNullOrEmpty()){
                     val intent: Intent

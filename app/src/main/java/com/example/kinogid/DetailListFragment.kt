@@ -1,24 +1,24 @@
 package com.example.kinogid
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
+import android.widget.Button
+import android.widget.EditText
 import android.widget.TextView
-import androidx.core.os.bundleOf
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.example.kinogid.movies.Movie
-import com.example.kinogid.movies.MovieCatalog
 
-class DetailListFragment: Fragment() {
+class DetailListFragment: Fragment(), MovieSelectorDialogFragment.OnMoviesSelectedListener {
     lateinit var viewModel: MainViewModel
-    private var adapter: MovieAdapter? = MovieAdapter(emptyList())
+    lateinit var titleTextView: TextView
+    lateinit var descriptionTextView: TextView
+    lateinit var selectMoviesButton: Button
+    lateinit var footer: TextView
+    var moviesId = mutableSetOf<Int>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -28,77 +28,71 @@ class DetailListFragment: Fragment() {
         viewModel = ViewModelProvider(requireActivity())[MainViewModel::class.java]
 
         val view = inflater.inflate(R.layout.fragment_detail_list, container, false)
+        titleTextView = view.findViewById(R.id.list_title)
+        descriptionTextView = view.findViewById(R.id.description)
+        selectMoviesButton = view.findViewById(R.id.add_movies_btn)
+        footer = view.findViewById(R.id.footer)
 
-        val movieRecyclerView = view.findViewById<RecyclerView>(R.id.movie_recycler_view)
-        movieRecyclerView.layoutManager = LinearLayoutManager(context)
-        /*viewModel.getListWatchedMovies()Не нужно, поскольку список везде где надо обновляется сам*/
-        val listOfMovies = createListOfMovies(viewModel.listWatchedMovies.value)
-        adapter = MovieAdapter(listOfMovies)
-        movieRecyclerView.adapter = adapter
+        titleTextView.setOnClickListener {
+            showEditDialog(titleTextView, 1)
+        }
 
-        val countTextView = view.findViewById<TextView>(R.id.count_tv).apply {
-            text = "Общее количество: ${listOfMovies.size}"
+        descriptionTextView.setOnClickListener {
+            showEditDialog(descriptionTextView, 2)
+        }
+
+        selectMoviesButton.setOnClickListener {
+            val dialogFragment = MovieSelectorDialogFragment()
+            dialogFragment.onMoviesSelectedListener = this
+            dialogFragment.show(parentFragmentManager, "MovieSelector")
+        }
+
+        footer.setOnClickListener {
+            viewModel.createNewListOfMovies(
+                titleTextView.text.toString(),
+                moviesId.joinToString(","),
+                descriptionTextView.text.toString()
+            )
         }
 
         return view
     }
 
-    private inner class MovieHolder(view: View): RecyclerView.ViewHolder(view), View.OnClickListener{
-        lateinit var movie: Movie
+    //type==1 => название; type==2 => описание
+    private fun showEditDialog(textView: TextView, type: Int) {
+        val inputField = EditText(requireContext())
 
-        val titleTextView: TextView = itemView.findViewById(R.id.movie_title)
-        val yearTextView: TextView = itemView.findViewById(R.id.year)
-        val durationTextView: TextView = itemView.findViewById(R.id.duration)
-        val ageRatingTextView: TextView = itemView.findViewById(R.id.age_rating)
-        val imdbRatingTextView: TextView = itemView.findViewById(R.id.imdb_rating)
-        val kinopoiskRatingTextView: TextView = itemView.findViewById(R.id.kinopoisk_rating)
-        val genresTextView: TextView = itemView.findViewById(R.id.genres)
-        val moviePoster = view.findViewById<ImageView>(R.id.movie_poster)
-
-        init {
-            itemView.setOnClickListener(this)
+        if (type == 1){
+            AlertDialog.Builder(requireContext(), R.style.DialogTheme)
+                .setTitle("Изменение названия списка")
+                .setView(inputField)
+                .setPositiveButton("Переименовать") { _, _ ->
+                    val newText = inputField.text.toString().replace("\n", "")
+                    if (newText.isNotBlank()) textView.text = newText
+                }
+                .setNegativeButton("Отмена", null)
+                .show()
         }
 
-        fun bind(movie: Movie){
-            this.movie = movie
-            titleTextView.text = movie.title
-            yearTextView.text = movie.year.toString()//на предупреждение пофиг наверное
-            durationTextView.text = normalizeDuration(movie.duration)
-            ageRatingTextView.text = movie.ageRating
-            imdbRatingTextView.text = movie.rateIMDB.toString()
-            kinopoiskRatingTextView.text = movie.rateKinopoisk.toString()
-            genresTextView.text = normalizeGenres(movie.genres)
-            Glide.with(this@DetailListFragment).load(movie.posterURL).placeholder(R.drawable.ic_load_placeholder)
-                .into(moviePoster)
-        }
-
-        override fun onClick(v: View?) {
-            val movieId = movie.id
-            val bundle = bundleOf("movieId" to movieId)
-            findNavController().navigate(R.id.action_detailListFragment_to_movieFragment, bundle)
+        if (type == 2){
+            inputField.setText(textView.text)
+            AlertDialog.Builder(requireContext(), R.style.DialogTheme)
+                .setTitle("Изменение описания списка")
+                .setView(inputField)
+                .setPositiveButton("Сохранить") { _, _ ->
+                    var newText = inputField.text.toString()/*.replace("\n\n\n", "\n\n") просто так
+                    не пойдет, поскольку если будет 7 подряд \n, то он уберет только 3, а не все 6 нужных*/
+                    while ("\n\n\n" in newText) newText = newText.replace("\n\n\n", "\n\n")
+                    while (newText.last() == '\n') newText = newText.dropLast(1)
+                    if (newText.isNotBlank()) textView.text = newText
+                }
+                .setNegativeButton("Отмена", null)
+                .show()
         }
     }
 
-    private inner class MovieAdapter(var movies: List<Movie>): RecyclerView.Adapter<MovieHolder>() {
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieHolder {
-            val view = layoutInflater.inflate(R.layout.list_item_movie, parent, false)
-            return MovieHolder(view)
-        }
-
-        override fun getItemCount() = movies.size
-
-        override fun onBindViewHolder(holder: MovieHolder, position: Int) {
-            val movie = movies[position]
-            holder.bind(movie)
-        }
-    }
-
-    private fun createListOfMovies(listOfId: List<Int>?):List<Movie>{
-        val listOfMovie:MutableList<Movie> = mutableListOf()
-        MovieCatalog.movieList.forEach { movie ->
-            if (movie.id in listOfId!!) listOfMovie.add(movie)
-        }
-        /*listOfMovie.shuffle() Здесь не нужно*/
-        return listOfMovie
+    override fun onMoviesSelected(selectedMoviesId: Set<Int>) {
+        moviesId = selectedMoviesId.toMutableSet()
+//        Log.d("MovieSelect", moviesId.toString())
     }
 }

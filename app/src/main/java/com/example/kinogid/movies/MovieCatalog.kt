@@ -207,6 +207,74 @@ object MovieCatalog{
 
         Movie(44, "Касабланка", 1942, 102, "6+",
             setOf(Genre.DRAMA, Genre.ROMANCE, Genre.WAR), 8.5f, 8.0f, "Пусто",
-            "https://m.media-amazon.com/images/M/MV5BY2IzZGY2YmEtYzljNS00NTM5LTgwMzUtMzM1NjQ4NGI0OTk0XkEyXkFqcGdeQXVyNDYyMDk5MTU@._V1_FMjpg_UY3000_.jpg", 3, 0)
+            "https://m.media-amazon.com/images/M/MV5BY2IzZGY2YmEtYzljNS00NTM5LTgwMzUtMzM1NjQ4NGI0OTk0XkEyXkFqcGdeQXVyNDYyMDk5MTU@._V1_FMjpg_UY3000_.jpg", 3, 0),
+
+        Movie(45, "Подозрительные лица", 1995, 106 , "16+",
+            setOf(Genre.CRIME, Genre.DRAMA, Genre.MYSTERY, Genre.THRILLER), 8.5f, 7.8f, "Пусто",
+            "https://m.media-amazon.com/images/M/MV5BYTViNjMyNmUtNDFkNC00ZDRlLThmMDUtZDU2YWE4NGI2ZjVmXkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_FMjpg_UX1000_.jpg", 2, 0),
+
+        Movie(46, "1+1", 2011, 112 , "14+",
+            setOf(Genre.DRAMA, Genre.COMEDY), 8.5f, 8.9f, "Пусто",
+            "https://m.media-amazon.com/images/M/MV5BMTYxNDA3MDQwNl5BMl5BanBnXkFtZTcwNTU4Mzc1Nw@@._V1_FMjpg_UX1024_.jpg", 0, 0),
+
+        Movie(47, "Новый кинотеатр «Парадизо»", 1988, 174, "16+",
+            setOf(Genre.DRAMA, Genre.ROMANCE), 8.5f, 8.0f, "Пусто",
+            "https://m.media-amazon.com/images/M/MV5BMTljNzc4YWEtYTZlMS00ODMyLWIwMTAtNWQxY2VkMDEwYTk5XkEyXkFqcGc@._V1_.jpg", 1, 1),
+
+        Movie(48, "Чужой", 1979, 117 , "18+",
+            setOf(Genre.HORROR, Genre.SCI_FI), 8.5f, 8.1f, "Пусто",
+            "https://m.media-amazon.com/images/M/MV5BOGQzZTBjMjQtOTVmMS00NGE5LWEyYmMtOGQ1ZGZjNmRkYjFhXkEyXkFqcGdeQXVyMjUzOTY1NTc@._V1_FMjpg_UX1024_.jpg", 1, 0),
+
+        Movie(49, "Новые времена", 1936, 87  , "0+",
+            setOf(Genre.COMEDY, Genre.DRAMA, Genre.ROMANCE), 8.5f, 8.1f, "Пусто",
+            "https://m.media-amazon.com/images/M/MV5BYjJiZjMzYzktNjU0NS00OTkxLWEwYzItYzdhYWJjN2QzMTRlL2ltYWdlL2ltYWdlXkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_FMjpg_UX1024_.jpg", 0, 0),
+
+        Movie(50, "Окно во двор", 1954, 112  , "12+",
+            setOf(Genre.DRAMA, Genre.MYSTERY, Genre.THRILLER), 8.5f, 8.0f, "Пусто",
+            "https://m.media-amazon.com/images/M/MV5BNGUxYWM3M2MtMGM3Mi00ZmRiLWE0NGQtZjE5ODI2OTJhNTU0XkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_FMjpg_UY3000_.jpg", 0, 0),
+
+        Movie(51, "Однажды на Диком Западе", 1968, 166  , "12+",
+            setOf(Genre.DRAMA, Genre.WESTERN), 8.5f, 8.0f, "Пусто",
+            "https://m.media-amazon.com/images/M/MV5BZjYyNGY1MDEtN2I1MC00MGVhLTljZTYtODQ1NzQ0ODc2NzZlXkEyXkFqcGc@._V1_.jpg", 0, 0),
+
+        Movie(52, "Джанго освобождённый", 2012, 165  , "18+",
+            setOf(Genre.DRAMA, Genre.COMEDY, Genre.WESTERN), 8.5f, 8.2f, "Пусто",
+            "https://m.media-amazon.com/images/M/MV5BMjIyNTQ5NjQ1OV5BMl5BanBnXkFtZTcwODg1MDU4OA@@._V1_FMjpg_UY3000_.jpg", 2, 2),
+//отсюда прекратил постеры обновлять, все остальное (награды, кп рейтинг все актуально!)
+        Movie(53, "Огни большого города", 1931, 87  , "0+",
+            setOf(Genre.DRAMA, Genre.ROMANCE, Genre.COMEDY), 8.5f, 8.5f, "Пусто",
+            "https://m.media-amazon.com/images/M/MV5BY2I4MmM1N2EtM2YzOS00OWUzLTkzYzctNDc5NDg2N2IyODJmXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_FMjpg_UX1024_.jpg", 0, 0),
+
+        Movie(54, "Апокалипсис сегодня", 1979, 147  , "18+",
+            setOf(Genre.DRAMA, Genre.MYSTERY, Genre.WAR), 8.4f, 8.1f, "Пусто",
+            "https://m.media-amazon.com/images/M/MV5BZDhiMTljYjYtODc1Yy00MmEwLTg2OTYtYmE1YTRmNDE4MmEwXkEyXkFqcGc@._V1_.jpg", 2, 3),
+
+        Movie(55, "Дюна: Часть вторая", 2024, 166  , "12+",
+            setOf(Genre.ACTION, Genre.ADVENTURE, Genre.DRAMA, Genre.SCI_FI), 8.5f, 8.2f, "Пусто",
+            "https://m.media-amazon.com/images/M/MV5BYjNmMjUxYzEtNzgxOC00NGJjLWI1MmMtYThkMDU2NjE4ZWIxXkEyXkFqcGc@._V1_.jpg", 2, 0),
+
+        Movie(56, "Помни", 2000, 113 , "16+",
+            setOf(Genre.MYSTERY, Genre.THRILLER), 8.4f, 7.9f, "Пусто",
+            "https://m.media-amazon.com/images/M/MV5BZTcyNjk1MjgtOWI3Mi00YzQwLWI5MTktMzY4ZmI2NDAyNzYzXkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_FMjpg_UX1024_.jpg", 0, 0),
+
+        Movie(57, "ВАЛЛИ", 2008, 98  , "0+",
+            setOf(Genre.ADVENTURE, Genre.FAMILY, Genre.ANIMATION, Genre.SCI_FI), 8.4f, 8.4f, "Пусто",
+            "https://m.media-amazon.com/images/M/MV5BMjExMTg5OTU0NF5BMl5BanBnXkFtZTcwMjMxMzMzMw@@._V1_FMjpg_UX1024_.jpg", 1, 1),
+
+        Movie(58, "Индиана Джонс: В поисках утраченного ковчега", 1981, 115, "0+",
+            setOf(Genre.ADVENTURE, Genre.ACTION), 8.4f, 8.0f, "Пусто",
+            "https://m.media-amazon.com/images/M/MV5BNTU2ODkyY2MtMjU1NC00NjE1LWEzYjgtMWQ3MzRhMTE0NDc0XkEyXkFqcGdeQXVyMjM4MzQ4OTQ@._V1_FMjpg_UX1024_.jpg", 5, 0),
+
+        Movie(59, "Жизнь других", 2006, 137, "16+",
+            setOf(Genre.DRAMA, Genre.MYSTERY, Genre.THRILLER), 8.4f, 8.1f, "Пусто",
+            "https://m.media-amazon.com/images/M/MV5BNmQyNmJjM2ItNTQzYi00ZjMxLWFjMDYtZjUyN2YwZDk5YWQ2XkEyXkFqcGdeQXVyMjUzOTY1NTc@._V1_FMjpg_UX1024_.jpg", 1, 0),
+
+        Movie(60, "Мстители: Война бесконечности", 2018, 149  , "16+",
+            setOf(Genre.ACTION, Genre.ADVENTURE, Genre.SCI_FI), 8.4f, 8.1f, "Пусто",
+            "https://m.media-amazon.com/images/M/MV5BMjMxNjY2MDU1OV5BMl5BanBnXkFtZTgwNzY1MTUwNTM@._V1_FMjpg_UX1024_.jpg", 0, 0),
+
+        Movie(61, "Сансет бульвар", 1950, 110 , "16+",
+            setOf(Genre.DRAMA), 8.4f, 8.0f, "Пусто",
+            "https://m.media-amazon.com/images/M/MV5BMTU0NTkyNzYwMF5BMl5BanBnXkFtZTgwMDU0NDk5MTI@._V1_.jpg", 3, 4),
         )
 }

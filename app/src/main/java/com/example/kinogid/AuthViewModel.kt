@@ -7,6 +7,10 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 
 class AuthViewModel(private val userRepository: UserRepository): ViewModel() {
+    suspend fun isEmpty(): Boolean{
+        return userRepository.isEmpty()
+    }
+
     /*Параметр resultCode — это результат операции, который передается из ViewModel в UI-слой
     (фрагмент/активность) через callback.*/
     fun registerUser(name: String, login: String, password: String, onResult: (Int) -> Unit){

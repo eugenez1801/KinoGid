@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.kinogid.movies.Genre
 import kotlinx.coroutines.launch
-import java.util.UUID
 
 class MainViewModel(private val userRepository: UserRepository): ViewModel() {
     val _user = MutableLiveData<User?>()
@@ -81,6 +80,20 @@ class MainViewModel(private val userRepository: UserRepository): ViewModel() {
         viewModelScope.launch {
             val listWatchedMovies = userRepository.getListWatchedMovies(user.value!!.id)
             _listWatchedMovies.postValue(listWatchedMovies)
+        }
+    }
+
+    val _listOfMovies = MutableLiveData<ListMovies?>()
+    val listOfMovie: LiveData<ListMovies?> get() = _listOfMovies//пока не пригодились
+
+    fun createNewListOfMovies(title: String, moviesId: String, description: String){
+        viewModelScope.launch {
+            val listMovies = ListMovies(
+                userId = user.value!!.id,
+                title = title,
+                moviesId = moviesId,
+                description = description)
+            userRepository.addListOfMovies(listMovies)
         }
     }
 }

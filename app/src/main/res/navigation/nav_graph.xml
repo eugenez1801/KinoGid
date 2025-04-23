@@ -52,6 +52,9 @@
             android:id="@+id/action_listsFragment_to_menu_search"
             app:destination="@id/menu_search" />
         <action
+            android:id="@+id/action_menu_lists_to_detailWatchedListFragment"
+            app:destination="@id/detailWatchedListFragment" />
+        <action
             android:id="@+id/action_menu_lists_to_detailListFragment"
             app:destination="@id/detailListFragment" />
     </fragment>
@@ -78,6 +81,15 @@
         <argument
             android:name="movieId"
             app:argType="integer"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/detailWatchedListFragment"
+        android:name="com.example.kinogid.DetailWatchedListFragment"
+        android:label="fragment_watched_detail_list" >
+        <action
+            android:id="@+id/action_detailWatchedListFragment_to_movieFragment"
+            app:destination="@id/movieFragment" />
     </fragment>
 
     <fragment

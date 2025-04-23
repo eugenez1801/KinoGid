@@ -63,4 +63,5 @@ dependencies {
     implementation("androidx.room:room-ktx:2.6.1")
     implementation ("com.github.bumptech.glide:glide:4.16.0")
     implementation ("androidx.datastore:datastore-preferences:1.1.4")
+    implementation (libs.material.v1110)//наверное для оформления AlertDialog нужен
 }
