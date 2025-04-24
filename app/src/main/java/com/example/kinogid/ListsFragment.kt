@@ -12,12 +12,15 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.kinogid.movies.Movie
 import com.example.kinogid.movies.MovieCatalog
 
 class ListsFragment: Fragment() {
     lateinit var viewModel: MainViewModel
+
     lateinit var firstImageView: ImageView
     lateinit var secondImageView: ImageView
     lateinit var thirdImageView: ImageView
@@ -25,6 +28,10 @@ class ListsFragment: Fragment() {
     lateinit var counterTextView: TextView
     lateinit var emptyListTextView: TextView
     lateinit var addListImageView: ImageView
+    lateinit var counterListsTextView: TextView
+    lateinit var listRecyclerView: RecyclerView
+
+    private var adapter: MovieListAdapter? = MovieListAdapter(emptyList())
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -43,6 +50,11 @@ class ListsFragment: Fragment() {
         addListImageView = view.findViewById(R.id.add_list)
         val watchedMovieList = view.findViewById<ConstraintLayout>(R.id.watched_movies_list)
 
+        counterListsTextView = view.findViewById(R.id.user_lists_tv)
+        listRecyclerView = view.findViewById(R.id.list_recycler_view)
+        listRecyclerView.layoutManager = LinearLayoutManager(context)
+        listRecyclerView.adapter = adapter
+
         viewModel.getListWatchedMovies()
         viewModel.listWatchedMovies.observe(viewLifecycleOwner){ listOfMoviesId ->
             controlWatchedMoviesField(listOfMoviesId)//передаст null, если list == null
@@ -58,7 +70,107 @@ class ListsFragment: Fragment() {
             findNavController().navigate(R.id.action_menu_lists_to_detailListFragment)
         }
 
+        viewModel.getUserLists()
+        viewModel.listOfMovie.observe(viewLifecycleOwner){ listOfListsMovies ->
+            adapter = MovieListAdapter(listOfListsMovies)
+            listRecyclerView.adapter = adapter
+            counterListsTextView.text = "Пользовательские списки: ${listOfListsMovies.size} штук"
+        }
+
         return view
+    }
+
+    private inner class MovieListHolder(view: View): RecyclerView.ViewHolder(view)/*, View.OnClickListener*/{
+        /*lateinit var moviesList: ListMovies зачем это вообще нужно было, не помню (для клика, вспомнил (или нет))*/
+
+        val titleTextView: TextView = itemView.findViewById(R.id.list_name)
+        val countTextView: TextView = itemView.findViewById(R.id.count_tv)
+        val firstPoster: ImageView = itemView.findViewById(R.id.first_movie_poster)
+        val secondPoster: ImageView = itemView.findViewById(R.id.second_movie_poster)
+        val thirdPoster: ImageView = itemView.findViewById(R.id.third_movie_poster)
+        val fourthPoster: ImageView = itemView.findViewById(R.id.fourth_movie_poster)
+
+        /*init {
+            itemView.setOnClickListener(this)
+        }*/
+
+        fun bind(moviesList: ListMovies){
+//            this.moviesList = moviesList
+            titleTextView.text = moviesList.title
+
+            //очень некрасиво, но пусть будет
+            val firstId = getSetIds(moviesList.moviesId).elementAtOrNull(0)
+            val firstMovie = MovieCatalog.movieList.firstOrNull {
+                it.id == firstId
+            }
+            if (firstMovie != null){
+                firstPoster.isGone = false
+                Glide.with(this@ListsFragment).load(firstMovie.posterURL)
+                    .placeholder(R.drawable.ic_load_placeholder).into(firstPoster)
+            }
+            else firstPoster.isGone = true//нужно подумать, isGone или просто visibility
+
+            val secondId = getSetIds(moviesList.moviesId).elementAtOrNull(1)
+            val secondMovie = MovieCatalog.movieList.firstOrNull {
+                it.id == secondId
+            }
+            if (secondMovie != null){
+                secondPoster.isGone = false
+                Glide.with(this@ListsFragment).load(secondMovie.posterURL)
+                    .placeholder(R.drawable.ic_load_placeholder).into(secondPoster)
+            }
+            else secondPoster.isGone = true
+
+            val thirdId = getSetIds(moviesList.moviesId).elementAtOrNull(2)
+            val thirdMovie = MovieCatalog.movieList.firstOrNull {
+                it.id == thirdId
+            }
+            if (thirdMovie != null){
+                thirdPoster.isGone = false
+                Glide.with(this@ListsFragment).load(thirdMovie.posterURL)
+                    .placeholder(R.drawable.ic_load_placeholder).into(thirdPoster)
+            }
+            else thirdPoster.isGone = true
+
+            val fourthId = getSetIds(moviesList.moviesId).elementAtOrNull(3)
+            val fourthMovie = MovieCatalog.movieList.firstOrNull {
+                it.id == fourthId
+            }
+            if (fourthMovie != null) {
+                fourthPoster.isGone = false
+                Glide.with(this@ListsFragment).load(fourthMovie.posterURL)
+                    .placeholder(R.drawable.ic_load_placeholder).into(fourthPoster)
+            }
+            else fourthPoster.isGone = true
+
+            val idsMovies = getSetIds(moviesList.moviesId)
+            countTextView.text = "Фильмов в списке: ${idsMovies.size}"
+        }
+
+        /*override fun onClick(v: View?) {
+            val movieId = movie.id
+            val bundle = bundleOf("movieId" to movieId)
+            findNavController().navigate(R.id.action_detailWatchedListFragment_to_movieFragment, bundle)
+        }*/
+    }
+
+    private fun getSetIds(stringIds: String): Set<Int> {
+        if (stringIds != "") return stringIds.split(",").map { it.toInt() }.toSet()
+        else return emptySet()
+    }
+
+    private inner class MovieListAdapter(var moviesList: List<ListMovies>): RecyclerView.Adapter<MovieListHolder>() {
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieListHolder {
+            val view = layoutInflater.inflate(R.layout.list_item_list_of_movies, parent, false)
+            return MovieListHolder(view)
+        }
+
+        override fun getItemCount() = moviesList.size
+
+        override fun onBindViewHolder(holder: MovieListHolder, position: Int) {
+            val movieList = moviesList[position]
+            holder.bind(movieList)
+        }
     }
 
     private fun controlWatchedMoviesField(listOfId: List<Int>?){

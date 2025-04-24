@@ -54,6 +54,14 @@ interface UserDao {
     @Insert
     suspend fun addListOfMovies(listOfMovies: ListMovies)
 
+    /*@Query("SELECT id FROM ListMovies WHERE userId = :userId")эти два запроса можно заменить нижним
+    suspend fun getUUIDOfUsersLists(userId: UUID): List<UUID>?
+
+    @Query("SELECT * FROM ListMovies WHERE id = :id")
+    suspend fun getList(id: UUID): ListMovies?*/
+    @Query("SELECT * FROM ListMovies WHERE userId = :userId")
+    suspend fun getUserLists(userId: UUID): List<ListMovies>
+
     @Query("UPDATE ListMovies SET title = :title WHERE id = :listId")
     suspend fun updateTitle(listId: UUID, title: String)
 

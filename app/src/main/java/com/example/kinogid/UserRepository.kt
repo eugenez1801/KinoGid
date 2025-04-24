@@ -64,7 +64,12 @@ class UserRepository(private val userDao: UserDao) {
         return userDao.getListWatchedMovies(userId)
     }
 
+
     suspend fun addListOfMovies(listOfMovies: ListMovies){
         return userDao.addListOfMovies(listOfMovies)
+    }
+
+    suspend fun getUserLists(userId: UUID): List<ListMovies>{
+        return userDao.getUserLists(userId)
     }
 }

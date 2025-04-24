@@ -11,6 +11,9 @@ import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
+import kotlinx.coroutines.launch
 
 class DetailListFragment: Fragment(), MovieSelectorDialogFragment.OnMoviesSelectedListener {
     lateinit var viewModel: MainViewModel
@@ -48,11 +51,14 @@ class DetailListFragment: Fragment(), MovieSelectorDialogFragment.OnMoviesSelect
         }
 
         footer.setOnClickListener {
-            viewModel.createNewListOfMovies(
-                titleTextView.text.toString(),
-                moviesId.joinToString(","),
-                descriptionTextView.text.toString()
-            )
+            lifecycleScope.launch {
+                viewModel.createNewListOfMovies(
+                    titleTextView.text.toString(),
+                    moviesId.joinToString(","),
+                    descriptionTextView.text.toString()
+                )
+                findNavController().popBackStack()
+            }
         }
 
         return view
@@ -66,7 +72,7 @@ class DetailListFragment: Fragment(), MovieSelectorDialogFragment.OnMoviesSelect
             AlertDialog.Builder(requireContext(), R.style.DialogTheme)
                 .setTitle("Изменение названия списка")
                 .setView(inputField)
-                .setPositiveButton("Переименовать") { _, _ ->
+                .setPositiveButton("Сохранить") { _, _ ->
                     val newText = inputField.text.toString().replace("\n", "")
                     if (newText.isNotBlank()) textView.text = newText
                 }

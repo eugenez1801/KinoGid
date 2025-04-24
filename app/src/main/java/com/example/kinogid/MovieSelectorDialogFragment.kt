@@ -73,6 +73,8 @@ class MovieSelectorDialogFragment: DialogFragment() {
         fun bind(movie: Movie){
             this.movie = movie
             titleTextView.text = movie.title
+            if (movie.id in movieIdSet) titleTextView.setTextColor(ContextCompat.getColor(requireContext(), R.color.red))
+            else titleTextView.setTextColor(ContextCompat.getColor(requireContext(), R.color.secondaryColor))
             yearTextView.text = movie.year.toString()
             durationTextView.text = normalizeDuration(movie.duration)
             ageRatingTextView.text = movie.ageRating

@@ -83,8 +83,8 @@ class MainViewModel(private val userRepository: UserRepository): ViewModel() {
         }
     }
 
-    val _listOfMovies = MutableLiveData<ListMovies?>()
-    val listOfMovie: LiveData<ListMovies?> get() = _listOfMovies//пока не пригодились
+    val _listOfMovies = MutableLiveData<List<ListMovies>>()
+    val listOfMovie: LiveData<List<ListMovies>> get() = _listOfMovies
 
     fun createNewListOfMovies(title: String, moviesId: String, description: String){
         viewModelScope.launch {
@@ -94,6 +94,13 @@ class MainViewModel(private val userRepository: UserRepository): ViewModel() {
                 moviesId = moviesId,
                 description = description)
             userRepository.addListOfMovies(listMovies)
+        }
+    }
+
+    fun getUserLists(){
+        viewModelScope.launch {
+            val listOfMovie = userRepository.getUserLists(user.value!!.id)
+            _listOfMovies.postValue(listOfMovie)
         }
     }
 }
