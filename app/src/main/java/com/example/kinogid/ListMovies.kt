@@ -15,7 +15,7 @@ import java.util.UUID
 data class ListMovies(
     @PrimaryKey val id: UUID = UUID.randomUUID(),
     val userId: UUID,
-    val title: String,
-    val moviesId: String,//пока так...
-    val description: String = ""
+    var title: String,
+    var moviesId: String,//пока так...
+    var description: String = ""
 )

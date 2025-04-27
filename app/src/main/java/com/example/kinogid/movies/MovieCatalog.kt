@@ -37,7 +37,7 @@ object MovieCatalog{
             9.0f, 8.5f, "Пусто", "https://m.media-amazon" +
                     ".com/images/M/MV5BMTMxNTMwODM0NF5BMl5BanBnXkFtZTcwODAyMTk2Mw@@._V1_FMjpg_UY3000_.jpg", 2, 1),
 
-        Movie(3, "Крестный отец 2", 1972, 202, "16+",
+        Movie(3, "Крестный отец 2", 1974, 202, "16+",
             setOf(Genre.CRIME, Genre.DRAMA), 9.0f, 8.5f, "Пусто",
             "https://m.media-amazon.com/images/M/MV5BMWMwMGQzZTItY2JlNC00OWZiLWIyMDctN" +
                     "Dk2ZDQ2YjRjMWQ0XkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_FMjpg_UY3000_.jpg", 6, 0),

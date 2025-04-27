@@ -1,6 +1,7 @@
 package com.example.kinogid
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,7 +18,7 @@ import com.example.kinogid.movies.MovieCatalog
 
 class MovieSelectorDialogFragment: DialogFragment() {
     private var adapter: MovieAdapter? = MovieAdapter(MovieCatalog.movieList)
-    private val movieIdSet = mutableSetOf<Int>()
+    var movieIdSet = mutableSetOf<Int>()
     lateinit var countTextView: TextView
     lateinit var cancelButton: Button
     lateinit var saveButton: Button
@@ -33,8 +34,25 @@ class MovieSelectorDialogFragment: DialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        //будет не при создании нового списка
+        val moviesIdStringFromFragment = arguments?.getString("SELECTED_MOVIES_STRING")
+        if (moviesIdStringFromFragment != null) {
+            movieIdSet = moviesIdStringFromFragment.split(",").map { it.toInt() }.toMutableSet()
+        }
+
+        //будет при создании нового списка
+        val moviesIdSetFromFragment = arguments?.getString("SELECTED_MOVIES_SET")
+        if (moviesIdSetFromFragment != null) {
+            movieIdSet = moviesIdSetFromFragment.replace("[", "")
+                .replace("]", "").replace(" ", "")
+                .split(",").map { it.toInt() }.toMutableSet()
+            Log.d("MOVIESIDSET", movieIdSet.toString())
+        }
+
         val view = inflater.inflate(R.layout.dialog_movies_selection, container, false)
         countTextView = view.findViewById(R.id.count_tv)
+        countTextView.text = "Выбрано фильмов: ${movieIdSet.size}"
+
         cancelButton = view.findViewById(R.id.cancel_button)
         saveButton = view.findViewById(R.id.save_button)
 

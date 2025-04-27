@@ -1,5 +1,6 @@
 package com.example.kinogid
 
+import androidx.room.Query
 import com.example.kinogid.database.UserDao
 import java.util.UUID
 
@@ -71,5 +72,24 @@ class UserRepository(private val userDao: UserDao) {
 
     suspend fun getUserLists(userId: UUID): List<ListMovies>{
         return userDao.getUserLists(userId)
+    }
+
+    suspend fun getListOfMovies(listId: UUID): ListMovies{
+        return userDao.getListOfMovies(listId)
+    }
+
+    /*suspend fun saveListOfMovies(listOfMovies: ListMovies){ отвергнут этот путь
+        return userDao.saveListOfMovies(listOfMovies)
+    }*/
+    suspend fun updateTitle(listId: UUID, title: String){
+        return userDao.updateTitle(listId, title)
+    }
+
+    suspend fun updateMovies(listId: UUID, moviesId: String){
+        return userDao.updateMovies(listId, moviesId)
+    }
+
+    suspend fun updateDescription(listId: UUID, description: String){
+        return userDao.updateDescription(listId, description)
     }
 }

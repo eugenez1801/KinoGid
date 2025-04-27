@@ -62,6 +62,14 @@ interface UserDao {
     @Query("SELECT * FROM ListMovies WHERE userId = :userId")
     suspend fun getUserLists(userId: UUID): List<ListMovies>
 
+    @Query("SELECT * FROM ListMovies WHERE id = :id")
+    suspend fun getListOfMovies(id: UUID): ListMovies
+
+    /*этот метод переносит обновленную строку вниз таблицы, поэтому сбивается порядок пользовательского списка
+    @Insert(onConflict = OnConflictStrategy.REPLACE)//замена, если UUID одинаковый
+    suspend fun saveListOfMovies(listOfMovies: ListMovies)*/
+
+    //эти методы будут вместо целого saveListOfMovies, который работает не так, как хотелось бы
     @Query("UPDATE ListMovies SET title = :title WHERE id = :listId")
     suspend fun updateTitle(listId: UUID, title: String)
 

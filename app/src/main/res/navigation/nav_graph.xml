@@ -99,6 +99,9 @@
         <action
             android:id="@+id/action_detailListFragment_to_movieFragment"
             app:destination="@id/movieFragment" />
+        <argument
+            android:name="movieListId"
+            app:argType="string" />
     </fragment>
 
 </navigation>

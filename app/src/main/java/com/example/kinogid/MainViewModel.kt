@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.kinogid.movies.Genre
 import kotlinx.coroutines.launch
+import java.util.UUID
 
 class MainViewModel(private val userRepository: UserRepository): ViewModel() {
     val _user = MutableLiveData<User?>()
@@ -83,8 +84,6 @@ class MainViewModel(private val userRepository: UserRepository): ViewModel() {
         }
     }
 
-    val _listOfMovies = MutableLiveData<List<ListMovies>>()
-    val listOfMovie: LiveData<List<ListMovies>> get() = _listOfMovies
 
     fun createNewListOfMovies(title: String, moviesId: String, description: String){
         viewModelScope.launch {
@@ -97,10 +96,48 @@ class MainViewModel(private val userRepository: UserRepository): ViewModel() {
         }
     }
 
+    val _listOfListsMovies = MutableLiveData<List<ListMovies>>()
+    val listOfListsMovies: LiveData<List<ListMovies>> get() = _listOfListsMovies
     fun getUserLists(){
         viewModelScope.launch {
-            val listOfMovie = userRepository.getUserLists(user.value!!.id)
-            _listOfMovies.postValue(listOfMovie)
+            val listOfListsMovies = userRepository.getUserLists(user.value!!.id)
+            _listOfListsMovies.postValue(listOfListsMovies)
+        }
+    }
+
+    val _listOfMovies = MutableLiveData<ListMovies?>()
+    val listOfMovies: LiveData<ListMovies?> get() = _listOfMovies
+    fun getListOfMovies(listId: UUID){
+        _listOfMovies.postValue(null)
+        viewModelScope.launch {
+            val listOfMovies = userRepository.getListOfMovies(listId)
+            _listOfMovies.postValue(listOfMovies)
+        }
+    }
+    fun clearListOfMovies() {
+        _listOfMovies.value = null
+    }
+
+    /*fun saveListOfMovies(listOfMovies: ListMovies){ отвергнут этот способ (причина в DAO)
+        viewModelScope.launch {
+            userRepository.saveListOfMovies(listOfMovies)
+        }
+    }*/
+    fun updateTitle(listId: UUID, title: String){
+        viewModelScope.launch {
+            userRepository.updateTitle(listId, title)
+        }
+    }
+
+    fun updateMovies(listId: UUID, moviesId: String){
+        viewModelScope.launch {
+            userRepository.updateMovies(listId, moviesId)
+        }
+    }
+
+    fun updateDescription(listId: UUID, description: String){
+        viewModelScope.launch {
+            userRepository.updateDescription(listId, description)
         }
     }
 }

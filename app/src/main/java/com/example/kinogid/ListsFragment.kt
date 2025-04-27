@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.os.bundleOf
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
@@ -71,7 +72,7 @@ class ListsFragment: Fragment() {
         }
 
         viewModel.getUserLists()
-        viewModel.listOfMovie.observe(viewLifecycleOwner){ listOfListsMovies ->
+        viewModel.listOfListsMovies.observe(viewLifecycleOwner){ listOfListsMovies ->
             adapter = MovieListAdapter(listOfListsMovies)
             listRecyclerView.adapter = adapter
             counterListsTextView.text = "Пользовательские списки: ${listOfListsMovies.size} штук"
@@ -80,8 +81,8 @@ class ListsFragment: Fragment() {
         return view
     }
 
-    private inner class MovieListHolder(view: View): RecyclerView.ViewHolder(view)/*, View.OnClickListener*/{
-        /*lateinit var moviesList: ListMovies зачем это вообще нужно было, не помню (для клика, вспомнил (или нет))*/
+    private inner class MovieListHolder(view: View): RecyclerView.ViewHolder(view), View.OnClickListener{
+        lateinit var moviesList: ListMovies
 
         val titleTextView: TextView = itemView.findViewById(R.id.list_name)
         val countTextView: TextView = itemView.findViewById(R.id.count_tv)
@@ -90,12 +91,12 @@ class ListsFragment: Fragment() {
         val thirdPoster: ImageView = itemView.findViewById(R.id.third_movie_poster)
         val fourthPoster: ImageView = itemView.findViewById(R.id.fourth_movie_poster)
 
-        /*init {
+        init {
             itemView.setOnClickListener(this)
-        }*/
+        }
 
         fun bind(moviesList: ListMovies){
-//            this.moviesList = moviesList
+            this.moviesList = moviesList
             titleTextView.text = moviesList.title
 
             //очень некрасиво, но пусть будет
@@ -147,11 +148,11 @@ class ListsFragment: Fragment() {
             countTextView.text = "Фильмов в списке: ${idsMovies.size}"
         }
 
-        /*override fun onClick(v: View?) {
-            val movieId = movie.id
-            val bundle = bundleOf("movieId" to movieId)
-            findNavController().navigate(R.id.action_detailWatchedListFragment_to_movieFragment, bundle)
-        }*/
+        override fun onClick(v: View?) {
+            val movieListId = moviesList.id
+            val bundle = bundleOf("movieListId" to movieListId.toString())
+            findNavController().navigate(R.id.action_menu_lists_to_detailListFragment, bundle)
+        }
     }
 
     private fun getSetIds(stringIds: String): Set<Int> {
