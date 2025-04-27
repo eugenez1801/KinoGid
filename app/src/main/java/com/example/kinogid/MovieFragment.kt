@@ -10,6 +10,7 @@ import android.widget.TextView
 import androidx.core.view.isGone
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import com.bumptech.glide.Glide
 import com.example.kinogid.movies.Genre
 import com.example.kinogid.movies.Movie
@@ -18,6 +19,7 @@ import com.example.kinogid.movies.MovieCatalog
 class MovieFragment: Fragment() {
     private lateinit var viewModel: MainViewModel
     lateinit var movie: Movie
+    var userRatingStatus: Int? = 1//отслеживаем этот статус для изменения  !UI!
 
     override fun onCreate(savedInstanceState: Bundle?) {
         val currentMovieId = arguments?.getInt("movieId")
@@ -79,6 +81,12 @@ class MovieFragment: Fragment() {
         Glide.with(this).load(movie.posterURL).placeholder(R.drawable.ic_load_placeholder)
             .into(moviePoster)
 
+        val footer = view.findViewById<TextView>(R.id.footer).apply {
+            setOnClickListener {
+                findNavController().popBackStack()
+            }
+        }
+
         viewModel.getWatchedMovie(movie.id)//задаем значение для viewModel.watchedMovie
         val watchedLinearLayout = view.findViewById<LinearLayout>(R.id.watched_field)
         val watchedImageView = view.findViewById<ImageView>(R.id.watched_ic)/*.apply {
@@ -91,7 +99,12 @@ class MovieFragment: Fragment() {
             if (viewModel.watchedMovie.value == null) text = "Фильм еще не просмотрен"
             else text = "Фильм просмотрен"
         }*/
+        val userRatingLinearLayout = view.findViewById<LinearLayout>(R.id.user_rating)
+        val userRatingImageView = view.findViewById<ImageView>(R.id.user_rating_iv)
+
         viewModel.watchedMovie.observe(viewLifecycleOwner){
+            userRatingStatus = it?.userRating
+
             watchedImageView.apply {
                 if (viewModel.watchedMovie.value == null) setBackgroundResource(R.drawable.ic_not_watched)
                 else setBackgroundResource(R.drawable.ic_watched)
@@ -99,6 +112,20 @@ class MovieFragment: Fragment() {
             watchedTextView.apply {
                 if (viewModel.watchedMovie.value == null) text = "Фильм еще не просмотрен"
                 else text = "Фильм просмотрен"
+            }
+
+            userRatingLinearLayout.apply {
+                if (viewModel.watchedMovie.value == null) isGone = true
+                else {
+                    isGone = false
+                    userRatingImageView.apply {
+                        when (it?.userRating){
+                            1 -> setBackgroundResource(R.drawable.ic_neutral_face)
+                            2 -> setBackgroundResource(R.drawable.ic_like)
+                            3 -> setBackgroundResource(R.drawable.ic_dislike)
+                        }
+                    }
+                }
             }
         }
 
@@ -113,6 +140,27 @@ class MovieFragment: Fragment() {
                     watchedTextView.text = "Фильм еще не просмотрен"
                 }
             }
+        }
+
+        userRatingLinearLayout.setOnClickListener{
+            when (userRatingStatus){
+                1 -> {
+                    viewModel.updateUserRating(movie.id, 2)//обновление для базы данных
+                    userRatingStatus = 2//обновление для этого фрагмента
+                    userRatingImageView.setBackgroundResource(R.drawable.ic_like)
+                }
+                2 -> {
+                    viewModel.updateUserRating(movie.id, 3)
+                    userRatingStatus = 3
+                    userRatingImageView.setBackgroundResource(R.drawable.ic_dislike)
+                }
+                3 -> {
+                    viewModel.updateUserRating(movie.id, 1)
+                    userRatingStatus = 1
+                    userRatingImageView.setBackgroundResource(R.drawable.ic_neutral_face)
+                }
+            }
+//            viewModel.getWatchedMovie(movie.id) не всегда успевает почему то
         }
         return view
     }

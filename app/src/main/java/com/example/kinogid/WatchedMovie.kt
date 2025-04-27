@@ -16,6 +16,6 @@ data class WatchedMovie(
     @PrimaryKey val id: UUID = UUID.randomUUID(),
     val userId: UUID,
     val movieId: Int,
-    val rating: Float?,
+    val userRating: Int = 1,//пусть по умолчанию - нейтральное
     val diaryText: String = ""
 )

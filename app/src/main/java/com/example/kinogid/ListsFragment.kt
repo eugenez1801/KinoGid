@@ -75,7 +75,7 @@ class ListsFragment: Fragment() {
         viewModel.listOfListsMovies.observe(viewLifecycleOwner){ listOfListsMovies ->
             adapter = MovieListAdapter(listOfListsMovies)
             listRecyclerView.adapter = adapter
-            counterListsTextView.text = "Пользовательские списки: ${listOfListsMovies.size} штук"
+            counterListsTextView.text = "Количество пользовательских списков: ${listOfListsMovies.size}"
         }
 
         return view
@@ -145,7 +145,9 @@ class ListsFragment: Fragment() {
             else fourthPoster.isGone = true
 
             val idsMovies = getSetIds(moviesList.moviesId)
-            countTextView.text = "Фильмов в списке: ${idsMovies.size}"
+            if (idsMovies.size == 0) countTextView.text = "Этот список пустой. Нажмите, чтобы " +
+                    "перейти к его редактированию и добавить в него фильмы"
+            else countTextView.text = "Фильмов в списке: ${idsMovies.size}"
         }
 
         override fun onClick(v: View?) {

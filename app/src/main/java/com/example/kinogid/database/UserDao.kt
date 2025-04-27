@@ -47,6 +47,9 @@ interface UserDao {
     @Query("DELETE FROM WatchedMovie WHERE userId = :userId AND movieId = :movieId")
     suspend fun deleteWatchedMovie(userId: UUID, movieId: Int)
 
+    @Query("UPDATE WatchedMovie SET userRating = :userRating WHERE userId = :userId AND movieId = :movieId ")
+    suspend fun updateUserRating(userId: UUID, movieId: Int, userRating: Int)
+
     @Query("SELECT movieId FROM WatchedMovie WhERE userId = :userId")
     suspend fun getListWatchedMovies(userId: UUID): List<Int>?
 
@@ -78,4 +81,7 @@ interface UserDao {
 
     @Query("UPDATE ListMovies SET description = :description WHERE id = :listId")
     suspend fun updateDescription(listId: UUID, description: String)
+
+    @Query("DELETE FROM ListMovies WHERE id = :id")
+    suspend fun deleteListOfMovies(id: UUID)
 }

@@ -61,6 +61,10 @@ class UserRepository(private val userDao: UserDao) {
         return userDao.deleteWatchedMovie(userId, movieId)
     }
 
+    suspend fun updateUserRating(userId: UUID, movieId: Int, userRating: Int){
+        return userDao.updateUserRating(userId, movieId, userRating)
+    }
+
     suspend fun getListWatchedMovies(userId: UUID): List<Int>?{
         return userDao.getListWatchedMovies(userId)
     }
@@ -91,5 +95,9 @@ class UserRepository(private val userDao: UserDao) {
 
     suspend fun updateDescription(listId: UUID, description: String){
         return userDao.updateDescription(listId, description)
+    }
+
+    suspend fun deleteListOfMovies(listId: UUID){
+        return userDao.deleteListOfMovies(listId)
     }
 }

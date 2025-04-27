@@ -12,6 +12,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.os.bundleOf
+import androidx.core.view.isGone
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -28,9 +29,12 @@ class DetailListFragment: Fragment(), MovieSelectorDialogFragment.OnMoviesSelect
     lateinit var viewModel: MainViewModel
     private var adapter: MovieAdapter? = MovieAdapter(emptyList())
     lateinit var titleTextView: TextView
+    lateinit var countTextView: TextView
     lateinit var descriptionTextView: TextView
     lateinit var selectMoviesButton: Button
     lateinit var footer: TextView
+    lateinit var backImageView: ImageView
+    lateinit var deleteImageView: ImageView
     lateinit var movieRecyclerView: RecyclerView
     lateinit var oldListOfMovies: ListMovies
     lateinit var newListOfMovies: ListMovies
@@ -60,11 +64,12 @@ class DetailListFragment: Fragment(), MovieSelectorDialogFragment.OnMoviesSelect
         titleTextView = view.findViewById<TextView?>(R.id.list_title).apply {
             if (isNewList) text = "Введите название для списка"
         }
+        countTextView = view.findViewById(R.id.count_tv)
         descriptionTextView = view.findViewById<TextView?>(R.id.description).apply {
             if (isNewList) text = "Введите описание списка"
         }
         selectMoviesButton = view.findViewById<Button?>(R.id.add_movies_btn).apply {
-            if (!isNewList) text = "Отредактировать список фильмов"
+            if (!isNewList) text = "Изменить список фильмов"
         }
         footer = view.findViewById<TextView?>(R.id.footer).apply {
             if (!isNewList){
@@ -91,6 +96,20 @@ class DetailListFragment: Fragment(), MovieSelectorDialogFragment.OnMoviesSelect
                         Toast.LENGTH_SHORT).show()
                 }
             }
+        }
+
+        backImageView = view.findViewById<ImageView?>(R.id.back_iv).apply {
+            setOnClickListener {
+                findNavController().popBackStack()
+            }
+        }
+
+        deleteImageView = view.findViewById<ImageView?>(R.id.delete_iv).apply {
+            if (!isNewList){
+                setOnClickListener {
+                    showEditDialog(deleteImageView, 4)
+                }
+            } else isGone = true
         }
 
         movieRecyclerView = view.findViewById(R.id.movie_recycler_view)
@@ -135,10 +154,7 @@ class DetailListFragment: Fragment(), MovieSelectorDialogFragment.OnMoviesSelect
                 if (!isNewListInitialized){
                     newListOfMovies = it.copy()
                     isNewListInitialized = true
-                    titleTextView.text = newListOfMovies.title
-                    descriptionTextView.text = newListOfMovies.description
-                    adapter = MovieAdapter(getMovieList(newListOfMovies.moviesId))
-                    movieRecyclerView.adapter = adapter
+                    updateUI()
                 }
 //                Log.d("MovieId", "Observe сработал. Old: $moviesId, New: $newMoviesId")
             }
@@ -146,13 +162,21 @@ class DetailListFragment: Fragment(), MovieSelectorDialogFragment.OnMoviesSelect
 
         //в этом условии прописывать все, что нужно сделать после возврата с фрагмента с деталями выбранного фильма
         if (isNewListInitialized){//нужно для обновления данных после возвращения с фрагмента с деталями фильма
-            titleTextView.text = newListOfMovies.title
-            descriptionTextView.text = newListOfMovies.description
-            adapter = MovieAdapter(getMovieList(newListOfMovies.moviesId))
-            movieRecyclerView.adapter = adapter
+            updateUI()
             doListsDiffer()
         }
         return view
+    }
+
+    private fun updateUI(){
+        titleTextView.text = newListOfMovies.title
+        Log.d("KOLICHE", newListOfMovies.moviesId)
+//        val countMovies = newListOfMovies.moviesId.split(",").size
+        if (newListOfMovies.moviesId.length == 0) countTextView.text = "Общее количество фильмов: 0"
+        else countTextView.text = "Общее количество фильмов: ${newListOfMovies.moviesId.split(",").size}"
+        descriptionTextView.text = newListOfMovies.description
+        adapter = MovieAdapter(getMovieList(newListOfMovies.moviesId))
+        movieRecyclerView.adapter = adapter
     }
 
     //для случая 0,1,2,3,4, и 1,2,3,4,0, (чтобы эти строки считались одинаковыми)
@@ -184,27 +208,36 @@ class DetailListFragment: Fragment(), MovieSelectorDialogFragment.OnMoviesSelect
         }
     }
 
-    //type==1 => название; type==2 => описание
-    private fun showEditDialog(textView: TextView, type: Int) {
+    //type==1 => название; type==2 => описание; type==3 => выйти с сохранением?; type==4 => удаление
+    private fun showEditDialog(view: View, type: Int) {
         val inputField = EditText(requireContext())
 
         if (type == 1){
+            val textView = view as TextView
             AlertDialog.Builder(requireContext(), R.style.DialogTheme)
                 .setTitle("Изменение названия списка")
                 .setView(inputField)
                 .setPositiveButton("Сохранить") { _, _ ->
                     val newText = inputField.text.toString().replace("\n", "")
                     if (newText.isNotBlank()) {
-                        textView.text = newText
-                        if (!isNewList) newListOfMovies.title = newText
+                        if (newText.length > 50)
+                            Toast.makeText(requireContext(), "Длина названия не должно превышать 50 символов",
+                                Toast.LENGTH_SHORT).show()
+                        else{
+                            textView.text = newText
+                            if (!isNewList) {
+                                newListOfMovies.title = newText
+                                doListsDiffer()
+                            }
+                        }
                     }
-                    if (!isNewList) doListsDiffer()
                 }
                 .setNegativeButton("Отмена", null)
                 .show()
         }
 
-        if (type == 2){
+        else if (type == 2){
+            val textView = view as TextView
             inputField.setText(textView.text)
             AlertDialog.Builder(requireContext(), R.style.DialogTheme)
                 .setTitle("Изменение описания списка")
@@ -223,7 +256,8 @@ class DetailListFragment: Fragment(), MovieSelectorDialogFragment.OnMoviesSelect
                 .setNegativeButton("Отмена", null)
                 .show()
         }
-        if (type == 3){
+        else if (type == 3){
+            val textView = view as TextView
             /*AlertDialog.Builder(requireContext(), R.style.DialogTheme)это не совсем подходящее
                 .setTitle("Сохранить изменения?")
                 .setPositiveButton("Сохранить") { _, _ ->
@@ -249,6 +283,18 @@ class DetailListFragment: Fragment(), MovieSelectorDialogFragment.OnMoviesSelect
                 .setNegativeButton("Отмена"){_, _ ->
                     findNavController().popBackStack()
                 }
+                .show()
+        }
+        else if (type == 4){
+            AlertDialog.Builder(requireContext(), R.style.DialogTheme)
+                .setTitle("Вы уверены, что хотите удалить этот список?")
+                .setPositiveButton("Да") { _, _ ->
+                    lifecycleScope.launch {
+                        viewModel.deleteListOfMovies(newListOfMovies.id)
+                        findNavController().popBackStack()
+                    }
+                }
+                .setNegativeButton("Нет", null)
                 .show()
         }
     }
@@ -308,6 +354,7 @@ class DetailListFragment: Fragment(), MovieSelectorDialogFragment.OnMoviesSelect
                 newMoviesId.remove(movie.id)
                 adapter = MovieAdapter(getSetMoviesFromSetOfIds(newMoviesId).toList())
                 movieRecyclerView.adapter = adapter
+                countTextView.text = "Общее количество фильмов: ${newMoviesId.size}"
             }
         }
     }
@@ -337,6 +384,7 @@ class DetailListFragment: Fragment(), MovieSelectorDialogFragment.OnMoviesSelect
     override fun onMoviesSelected(selectedMoviesId: Set<Int>) {
         newMoviesId = selectedMoviesId.toMutableSet()//нужен для сохранения в базу данных в дальнейшем
         if (!isNewList) newListOfMovies.moviesId = selectedMoviesId.joinToString(",")
+        countTextView.text = "Общее количество фильмов: ${selectedMoviesId.size}"
         adapter = MovieAdapter(getSetMoviesFromSetOfIds(selectedMoviesId).toList())
         movieRecyclerView.adapter = adapter
         if (!isNewList) doListsDiffer()

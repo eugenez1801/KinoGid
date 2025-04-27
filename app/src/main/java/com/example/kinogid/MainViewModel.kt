@@ -61,8 +61,7 @@ class MainViewModel(private val userRepository: UserRepository): ViewModel() {
             if (userRepository.getWatchedMovie(user.value!!.id, movieId) == null) {
                 val watchedMovie = WatchedMovie(
                     userId = user.value!!.id,
-                    movieId = movieId,
-                    rating = null)
+                    movieId = movieId)
                 userRepository.makeMovieIsWatched(watchedMovie)
                 onResult(1)
             }
@@ -72,6 +71,12 @@ class MainViewModel(private val userRepository: UserRepository): ViewModel() {
             }
             getWatchedMovie(movieId)
             getListWatchedMovies()//обновляем список после изменений в этом методе
+        }
+    }
+
+    fun updateUserRating(movieId: Int, userRating: Int){
+        viewModelScope.launch {
+            userRepository.updateUserRating(user.value!!.id, movieId, userRating)
         }
     }
 
@@ -138,6 +143,12 @@ class MainViewModel(private val userRepository: UserRepository): ViewModel() {
     fun updateDescription(listId: UUID, description: String){
         viewModelScope.launch {
             userRepository.updateDescription(listId, description)
+        }
+    }
+
+    fun deleteListOfMovies(listId: UUID){
+        viewModelScope.launch {
+            userRepository.deleteListOfMovies(listId)
         }
     }
 }
