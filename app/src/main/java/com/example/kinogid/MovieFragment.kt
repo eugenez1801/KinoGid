@@ -1,9 +1,11 @@
 package com.example.kinogid
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -15,11 +17,15 @@ import com.bumptech.glide.Glide
 import com.example.kinogid.movies.Genre
 import com.example.kinogid.movies.Movie
 import com.example.kinogid.movies.MovieCatalog
+import com.google.android.material.textfield.TextInputEditText
+import org.w3c.dom.Text
 
 class MovieFragment: Fragment() {
     private lateinit var viewModel: MainViewModel
     lateinit var movie: Movie
     var userRatingStatus: Int? = 1//отслеживаем этот статус для изменения  !UI!
+    lateinit var currentDiaryText: String
+    var isEditMode = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         val currentMovieId = arguments?.getInt("movieId")
@@ -78,6 +84,12 @@ class MovieFragment: Fragment() {
             else isGone = true
         }
 
+        val descriptionTextView = view.findViewById<TextView>(R.id.description_tv).apply {
+            var descriptionText = "   ${movie.description}".replace("\n", "\n   ")
+//            if ("\n" in descriptionText) descriptionText.replace("\n", "\n   ")
+            text = descriptionText
+        }
+
         Glide.with(this).load(movie.posterURL).placeholder(R.drawable.ic_load_placeholder)
             .into(moviePoster)
 
@@ -99,11 +111,64 @@ class MovieFragment: Fragment() {
             if (viewModel.watchedMovie.value == null) text = "Фильм еще не просмотрен"
             else text = "Фильм просмотрен"
         }*/
+
         val userRatingLinearLayout = view.findViewById<LinearLayout>(R.id.user_rating)
         val userRatingImageView = view.findViewById<ImageView>(R.id.user_rating_iv)
 
+        val diaryTextView = view.findViewById<TextView>(R.id.user_diary_tv)
+        val diaryEdit = view.findViewById<TextInputEditText>(R.id.user_diary_edit)
+        val diaryCancelTextView = view.findViewById<TextView>(R.id.cancel_tv)
+        val diarySaveTextView = view.findViewById<TextView>(R.id.save_tv)
+
+        fun closeEditMode(){
+            isEditMode = false
+            diaryTextView.apply {
+                isGone = false
+                if (currentDiaryText.isNotBlank()) text = currentDiaryText
+                else text = "Вы не писали заметок. Нажмите на заголовок выше для редактирования."
+            }
+            diaryEdit.isGone = true
+            diaryCancelTextView.isGone = true
+            diarySaveTextView.isGone = true
+        }
+
+        fun openEditMode(){
+            isEditMode = true
+            diaryTextView.isGone = true
+            diaryEdit.apply {
+                isGone = false
+                setText(currentDiaryText)
+            }
+            diaryCancelTextView.apply {
+                isGone = false
+                setOnClickListener {
+                    closeEditMode()
+                }
+            }
+            diarySaveTextView.apply {
+                isGone = false
+                setOnClickListener {
+                    var newDiaryText = diaryEdit.text.toString()
+                    while ("\n\n\n" in newDiaryText) newDiaryText = newDiaryText.replace("\n\n\n", "\n\n")
+                    viewModel.updateDiaryText(movie.id, newDiaryText)
+                    currentDiaryText = newDiaryText
+                    closeEditMode()
+                }
+            }
+        }
+
+        val diaryTitleTextView = view.findViewById<TextView>(R.id.user_diary).apply {
+            setOnClickListener {
+                when(isEditMode ){
+                    true -> closeEditMode()
+                    false -> openEditMode()
+                }
+            }
+        }
+
         viewModel.watchedMovie.observe(viewLifecycleOwner){
-            userRatingStatus = it?.userRating
+            userRatingStatus = it?.userRating//задаем начальное значение для дальнейшей работы с UI
+            currentDiaryText = it?.diaryText.toString()
 
             watchedImageView.apply {
                 if (viewModel.watchedMovie.value == null) setBackgroundResource(R.drawable.ic_not_watched)
@@ -127,17 +192,49 @@ class MovieFragment: Fragment() {
                     }
                 }
             }
+
+            diaryTitleTextView.apply {
+                if (viewModel.watchedMovie.value == null) isGone = true
+                else isGone = false
+            }
+
+            diaryTextView.apply {
+                if (viewModel.watchedMovie.value == null) isGone = true
+                else{
+                    isGone = false
+                    if (it?.diaryText == "") text = "Вы не писали заметок. Нажмите на заголовок выше для редактирования."
+                    else text = it?.diaryText
+                }
+            }
         }
 
         watchedLinearLayout.setOnClickListener{
-            viewModel.updateStatusWatchedMovie(movie.id){ resultCode ->
-                if (resultCode == 1){
-                    watchedImageView.setBackgroundResource(R.drawable.ic_watched)
-                    watchedTextView.text = "Фильм просмотрен"
-                }
-                else {
-                    watchedImageView.setBackgroundResource(R.drawable.ic_not_watched)
-                    watchedTextView.text = "Фильм еще не просмотрен"
+            if (viewModel.watchedMovie.value != null){
+                AlertDialog.Builder(requireContext(),  R.style.DialogTheme)
+                    .setMessage("Вы уверены, что хотите исключить фильм из списка просмотренных?")
+                    .setPositiveButton("Да") { _, _ ->
+                        viewModel.updateStatusWatchedMovie(movie.id) { resultCode ->
+                            if (resultCode == 1) {
+                                watchedImageView.setBackgroundResource(R.drawable.ic_watched)
+                                watchedTextView.text = "Фильм просмотрен"
+                            } else {
+                                watchedImageView.setBackgroundResource(R.drawable.ic_not_watched)
+                                watchedTextView.text = "Фильм еще не просмотрен"
+                            }
+                        }
+                    }
+                    .setNegativeButton("Нет", null).show()
+            }
+            else{
+                viewModel.updateStatusWatchedMovie(movie.id){ resultCode ->
+                    if (resultCode == 1){
+                        watchedImageView.setBackgroundResource(R.drawable.ic_watched)
+                        watchedTextView.text = "Фильм просмотрен"
+                    }
+                    else {
+                        watchedImageView.setBackgroundResource(R.drawable.ic_not_watched)
+                        watchedTextView.text = "Фильм еще не просмотрен"
+                    }
                 }
             }
         }

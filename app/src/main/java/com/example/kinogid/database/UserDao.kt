@@ -50,6 +50,9 @@ interface UserDao {
     @Query("UPDATE WatchedMovie SET userRating = :userRating WHERE userId = :userId AND movieId = :movieId ")
     suspend fun updateUserRating(userId: UUID, movieId: Int, userRating: Int)
 
+    @Query("UPDATE WatchedMovie SET diaryText = :diaryText WHERE userId = :userId AND movieId = :movieId ")
+    suspend fun updateDiaryText(userId: UUID, movieId: Int, diaryText: String)
+
     @Query("SELECT movieId FROM WatchedMovie WhERE userId = :userId")
     suspend fun getListWatchedMovies(userId: UUID): List<Int>?
 

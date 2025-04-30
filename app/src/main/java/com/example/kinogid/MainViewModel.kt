@@ -80,6 +80,12 @@ class MainViewModel(private val userRepository: UserRepository): ViewModel() {
         }
     }
 
+    fun updateDiaryText(movieId: Int, diaryText: String){
+        viewModelScope.launch {
+            userRepository.updateDiaryText(user.value!!.id, movieId, diaryText)
+        }
+    }
+
     val _listWatchedMovies = MutableLiveData<List<Int>?>()
     val listWatchedMovies: LiveData<List<Int>?> get() = _listWatchedMovies
     fun getListWatchedMovies(){

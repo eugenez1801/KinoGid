@@ -65,6 +65,10 @@ class UserRepository(private val userDao: UserDao) {
         return userDao.updateUserRating(userId, movieId, userRating)
     }
 
+    suspend fun updateDiaryText(userId: UUID, movieId: Int, diaryText: String){
+        return userDao.updateDiaryText(userId, movieId, diaryText)
+    }
+
     suspend fun getListWatchedMovies(userId: UUID): List<Int>?{
         return userDao.getListWatchedMovies(userId)
     }

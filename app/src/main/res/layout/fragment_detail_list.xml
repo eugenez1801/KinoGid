@@ -6,125 +6,131 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/backgroundColor">
 
-    <ImageView
-        android:id="@+id/back_iv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        android:src="@drawable/ic_back_arrow"
-
-        android:layout_marginStart="2dp"
-        android:layout_marginTop="40dp"
-
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/delete_iv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        android:src="@drawable/ic_trash"
-
-        android:layout_marginEnd="5dp"
-        android:layout_marginTop="40dp"
-
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/list_title"
-        style="@style/TextAppearance.PTSerif.ProfileAndMovieFields"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:minHeight="45dp"
-
-        android:paddingBottom="20dp"
-
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="14dp"
-        android:layout_marginStart="14dp"
-
-        android:background="@color/primaryColor"
-        android:gravity="top|center"
-
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/back_iv"
-        tools:text="Введите название для списка" />
-
-    <TextView
-        android:id="@+id/count_tv"
-        style="@style/TextAppearance.PTSerifCaption.MovieInfo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        android:layout_marginTop="-20dp"
-
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/list_title"
-        tools:text="Общее количество фильмов: 12" />
-
     <ScrollView
-        android:id="@+id/description_sv"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-
-        android:layout_marginStart="14dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="14dp"
-
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/list_title"
-
-        app:layout_constraintHeight_min="0dp"
-        app:layout_constraintHeight_max="110dp">
-        <TextView
-            android:id="@+id/description"
-            style="@style/TextAppearance.PTSerifCaption.MovieInfo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-
-            android:background="@color/primaryColor"
-            tools:text="Введите описание спискаGGGGGGGGGGGGGGGGGGGGG" />
-    </ScrollView>
-
-
-
-    <android.widget.Button
-        android:id="@+id/add_movies_btn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-
-        android:layout_marginStart="14dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="14dp"
-
-        android:text="Добавьте в список фильмы"
-
-        android:background="@drawable/shape_rounded"
-        android:backgroundTint="@color/buttonColor"
-        android:textAppearance="@style/TextAppearance.PTSerifCaption.ButtonText"
-
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/description_sv" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/movie_recycler_view"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="14dp"
-        android:layout_marginStart="14dp"
-
         app:layout_constraintBottom_toTopOf="@+id/footer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/add_movies_btn" />
+        app:layout_constraintTop_toTopOf="parent" >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/back_iv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:src="@drawable/ic_back_arrow"
+
+                android:layout_marginStart="2dp"
+                android:layout_marginTop="40dp"
+
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/delete_iv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:src="@drawable/ic_trash"
+
+                android:layout_marginEnd="5dp"
+                android:layout_marginTop="40dp"
+
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/list_title"
+                style="@style/TextAppearance.PTSerif.ProfileAndMovieFields"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="45dp"
+
+                android:paddingBottom="20dp"
+
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="14dp"
+                android:layout_marginStart="14dp"
+
+                android:background="@color/primaryColor"
+                android:gravity="top|center"
+
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/back_iv"
+                tools:text="Введите название для списка" />
+
+            <TextView
+                android:id="@+id/count_tv"
+                style="@style/TextAppearance.PTSerifCaption.MovieInfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="-20dp"
+
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/list_title"
+                tools:text="Общее количество фильмов: 12" />
+
+            <TextView
+                android:id="@+id/description"
+                style="@style/TextAppearance.PTSerifCaption.MovieInfo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_marginStart="14dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="14dp"
+
+                android:background="@color/primaryColor"
+                tools:text="Введите описание спискаGGGGGGGGGGGGGGGGGGGGG"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/list_title"/>
+
+            <android.widget.Button
+                android:id="@+id/add_movies_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_marginStart="14dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="14dp"
+
+                android:text="Добавьте в список фильмы"
+
+                android:background="@drawable/shape_rounded"
+                android:backgroundTint="@color/buttonColor"
+                android:textAppearance="@style/TextAppearance.PTSerifCaption.ButtonText"
+
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/description" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/movie_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="14dp"
+                android:layout_marginStart="14dp"
+                android:layout_marginBottom="10dp"
+
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/add_movies_btn" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
 
     <TextView
         android:id="@+id/footer"
