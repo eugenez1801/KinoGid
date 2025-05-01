@@ -32,45 +32,61 @@
         app:layout_constraintStart_toEndOf="@+id/profile"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/name_field"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/profile"
-
-        tools:text="Имя: Любитель кино"
-        android:gravity="center"
-
-        android:background="@color/primaryColor"
-
-        android:layout_marginStart="14dp"
-        android:layout_marginEnd="14dp"
-        android:layout_marginTop="44dp"
-
-        style="@style/TextAppearance.PTSerif.ProfileAndMovieFields"/>
-
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="110dp"
-        android:layout_marginStart="14dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="14dp"
+        android:layout_height="0dp"
+
+        android:layout_marginTop="15dp"
+
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/name_field">
+        app:layout_constraintTop_toBottomOf="@id/profile">
 
-        <TextView
-            android:id="@+id/preferences_field"
-            style="@style/TextAppearance.PTSerif.ProfileAndMovieFields"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent">
 
-            android:background="@color/primaryColor"
-            android:paddingStart="7dp"
-            android:paddingTop="3dp"
-            android:paddingEnd="7dp"
-            android:paddingBottom="7dp"
-            tools:text="Любимые жанры: Драма, Криминал" />
+            <TextView
+                android:id="@+id/name_field"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+
+                tools:text="Имя: Любитель кино"
+                android:gravity="center"
+
+                android:background="@color/primaryColor"
+
+                android:layout_marginStart="14dp"
+                android:layout_marginEnd="14dp"
+
+                style="@style/TextAppearance.PTSerif.ProfileAndMovieFields"/>
+
+                <TextView
+                    android:id="@+id/preferences_field"
+                    style="@style/TextAppearance.PTSerif.ProfileAndMovieFields"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginStart="14dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="14dp"
+
+                    android:background="@color/primaryColor"
+
+                    android:paddingStart="7dp"
+                    android:paddingTop="3dp"
+                    android:paddingEnd="7dp"
+                    android:paddingBottom="7dp"
+
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/name_field"
+                    tools:text="Любимые жанры: Драма, Криминал" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

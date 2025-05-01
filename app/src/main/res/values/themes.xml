@@ -4,6 +4,11 @@
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
         <item name="android:windowBackground">@color/black</item><!--чтобы белые вспышки убрать-->
+        <item name="android:textSelectHandle">@drawable/text_handle_drawable</item>
+        <item name="android:textSelectHandleLeft">@drawable/text_handle_drawable_left</item>
+        <item name="android:textSelectHandleRight">@drawable/text_handle_drawable_right</item>
+        <item name="android:textCursorDrawable">@drawable/cursor_drawable</item>
+        <item name="android:textColorHighlight">#66000000</item>
     </style>
 
     <style name="Theme.KinoGid" parent="Base.Theme.KinoGid" />

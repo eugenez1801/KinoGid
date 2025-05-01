@@ -9,6 +9,7 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.core.view.isGone
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -17,6 +18,7 @@ import com.bumptech.glide.Glide
 import com.example.kinogid.movies.Genre
 import com.example.kinogid.movies.Movie
 import com.example.kinogid.movies.MovieCatalog
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textfield.TextInputEditText
 import org.w3c.dom.Text
 
@@ -117,6 +119,7 @@ class MovieFragment: Fragment() {
 
         val diaryTextView = view.findViewById<TextView>(R.id.user_diary_tv)
         val diaryEdit = view.findViewById<TextInputEditText>(R.id.user_diary_edit)
+        diaryEdit.setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
         val diaryCancelTextView = view.findViewById<TextView>(R.id.cancel_tv)
         val diarySaveTextView = view.findViewById<TextView>(R.id.save_tv)
 
@@ -210,7 +213,7 @@ class MovieFragment: Fragment() {
 
         watchedLinearLayout.setOnClickListener{
             if (viewModel.watchedMovie.value != null){
-                AlertDialog.Builder(requireContext(),  R.style.DialogTheme)
+                MaterialAlertDialogBuilder(requireContext(), R.style.DialogTheme)
                     .setMessage("Вы уверены, что хотите исключить фильм из списка просмотренных?")
                     .setPositiveButton("Да") { _, _ ->
                         viewModel.updateStatusWatchedMovie(movie.id) { resultCode ->

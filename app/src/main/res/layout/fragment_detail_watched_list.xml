@@ -55,10 +55,25 @@
         android:layout_width="match_parent"
         android:layout_height="56dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:gravity="center"
+        android:gravity="center|top"
 
         android:background="@color/primaryColor"
 
         android:text="Информация о выбранном списке" />
+
+    <TextView
+        android:id="@+id/textView"
+        style="@style/TextAppearance.PTSerifCaption.MovieInfo"
+        android:layout_width="wrap_content"
+
+        android:layout_height="wrap_content"
+        android:layout_marginTop="27dp"
+
+        android:text="Нажмите сюда, чтобы вернуться на предыдущий экран"
+
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/footer"
+        app:layout_constraintTop_toTopOf="@+id/footer" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

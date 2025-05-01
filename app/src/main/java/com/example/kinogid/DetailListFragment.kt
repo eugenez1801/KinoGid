@@ -11,6 +11,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.compose.ui.graphics.Color
+import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.core.view.isGone
 import androidx.fragment.app.Fragment
@@ -22,6 +24,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.kinogid.movies.Movie
 import com.example.kinogid.movies.MovieCatalog
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.launch
 import java.util.UUID
 
@@ -211,11 +214,12 @@ class DetailListFragment: Fragment(), MovieSelectorDialogFragment.OnMoviesSelect
     //type==1 => название; type==2 => описание; type==3 => выйти с сохранением?; type==4 => удаление
     private fun showEditDialog(view: View, type: Int) {
         val inputField = EditText(requireContext())
+        inputField.setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
 
         if (type == 1){
             val textView = view as TextView
-            AlertDialog.Builder(requireContext(), R.style.DialogTheme)
-                .setTitle("Изменение названия списка")
+            MaterialAlertDialogBuilder(requireContext(), R.style.DialogTheme)
+                .setMessage("Изменение названия списка")
                 .setView(inputField)
                 .setPositiveButton("Сохранить") { _, _ ->
                     val newText = inputField.text.toString().replace("\n", "")
@@ -239,8 +243,8 @@ class DetailListFragment: Fragment(), MovieSelectorDialogFragment.OnMoviesSelect
         else if (type == 2){
             val textView = view as TextView
             inputField.setText(textView.text)
-            AlertDialog.Builder(requireContext(), R.style.DialogTheme)
-                .setTitle("Изменение описания списка")
+            MaterialAlertDialogBuilder(requireContext(), R.style.DialogTheme)
+                .setMessage("Изменение описания списка")
                 .setView(inputField)
                 .setPositiveButton("Сохранить") { _, _ ->
                     var newText = inputField.text.toString()/*.replace("\n\n\n", "\n\n") просто так
@@ -270,8 +274,8 @@ class DetailListFragment: Fragment(), MovieSelectorDialogFragment.OnMoviesSelect
                     findNavController().popBackStack()
                 }
                 .show()*/
-            AlertDialog.Builder(requireContext(), R.style.DialogTheme)
-                .setTitle("Сохранить изменения?")
+            MaterialAlertDialogBuilder(requireContext(), R.style.DialogTheme)
+                .setMessage("Сохранить изменения?")
                 .setPositiveButton("Сохранить") { _, _ ->
                     lifecycleScope.launch {//обновляем по отдельности, чтобы избегать ненужных проблем
                         viewModel.updateTitle(newListOfMovies.id, newListOfMovies.title)
@@ -286,8 +290,8 @@ class DetailListFragment: Fragment(), MovieSelectorDialogFragment.OnMoviesSelect
                 .show()
         }
         else if (type == 4){
-            AlertDialog.Builder(requireContext(), R.style.DialogTheme)
-                .setTitle("Вы уверены, что хотите удалить этот список?")
+            MaterialAlertDialogBuilder(requireContext(), R.style.DialogTheme)
+                .setMessage("Вы уверены, что хотите удалить этот список?")
                 .setPositiveButton("Да") { _, _ ->
                     lifecycleScope.launch {
                         viewModel.deleteListOfMovies(newListOfMovies.id)

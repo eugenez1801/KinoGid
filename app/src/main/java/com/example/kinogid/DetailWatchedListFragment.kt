@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -37,6 +38,10 @@ class DetailWatchedListFragment: Fragment() {
 
         val countTextView = view.findViewById<TextView>(R.id.count_tv).apply {
             text = "Общее количество: ${listOfMovies.size}"
+        }
+
+        val footer = view.findViewById<TextView>(R.id.footer).apply {
+            setOnClickListener { findNavController().popBackStack() }
         }
 
         return view
