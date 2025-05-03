@@ -35,8 +35,6 @@
         android:iconifiedByDefault="false"
 
         android:queryHint="Введите название фильма"
-        android:textColorHint="@color/blue"
-        android:textColor="@color/blue"
 
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

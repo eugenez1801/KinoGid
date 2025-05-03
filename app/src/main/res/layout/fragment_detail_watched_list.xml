@@ -44,10 +44,23 @@
 
         android:layout_marginTop="20dp"
 
-        app:layout_constraintBottom_toTopOf="@+id/footer"
+        app:layout_constraintBottom_toTopOf="@id/footer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/list_title" />
+
+    <View
+        android:id="@+id/separator"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+
+        android:layout_marginBottom="-1dp"
+
+        android:background="@color/buttonTextColor"
+
+        app:layout_constraintBottom_toTopOf="@+id/footer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/footer"

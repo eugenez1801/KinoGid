@@ -1,5 +1,6 @@
 package com.example.kinogid
 
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -221,6 +222,7 @@ class DetailListFragment: Fragment(), MovieSelectorDialogFragment.OnMoviesSelect
             MaterialAlertDialogBuilder(requireContext(), R.style.DialogTheme)
                 .setMessage("Изменение названия списка")
                 .setView(inputField)
+                .setBackground(ColorDrawable(ContextCompat.getColor(requireContext(), R.color.primaryColor)))
                 .setPositiveButton("Сохранить") { _, _ ->
                     val newText = inputField.text.toString().replace("\n", "")
                     if (newText.isNotBlank()) {
@@ -246,6 +248,7 @@ class DetailListFragment: Fragment(), MovieSelectorDialogFragment.OnMoviesSelect
             MaterialAlertDialogBuilder(requireContext(), R.style.DialogTheme)
                 .setMessage("Изменение описания списка")
                 .setView(inputField)
+                .setBackground(ColorDrawable(ContextCompat.getColor(requireContext(), R.color.primaryColor)))
                 .setPositiveButton("Сохранить") { _, _ ->
                     var newText = inputField.text.toString()/*.replace("\n\n\n", "\n\n") просто так
                     не пойдет, поскольку если будет 7 подряд \n, то он уберет только 3, а не все 6 нужных*/
@@ -276,6 +279,7 @@ class DetailListFragment: Fragment(), MovieSelectorDialogFragment.OnMoviesSelect
                 .show()*/
             MaterialAlertDialogBuilder(requireContext(), R.style.DialogTheme)
                 .setMessage("Сохранить изменения?")
+                .setBackground(ColorDrawable(ContextCompat.getColor(requireContext(), R.color.primaryColor)))
                 .setPositiveButton("Сохранить") { _, _ ->
                     lifecycleScope.launch {//обновляем по отдельности, чтобы избегать ненужных проблем
                         viewModel.updateTitle(newListOfMovies.id, newListOfMovies.title)
@@ -292,6 +296,7 @@ class DetailListFragment: Fragment(), MovieSelectorDialogFragment.OnMoviesSelect
         else if (type == 4){
             MaterialAlertDialogBuilder(requireContext(), R.style.DialogTheme)
                 .setMessage("Вы уверены, что хотите удалить этот список?")
+                .setBackground(ColorDrawable(ContextCompat.getColor(requireContext(), R.color.primaryColor)))
                 .setPositiveButton("Да") { _, _ ->
                     lifecycleScope.launch {
                         viewModel.deleteListOfMovies(newListOfMovies.id)

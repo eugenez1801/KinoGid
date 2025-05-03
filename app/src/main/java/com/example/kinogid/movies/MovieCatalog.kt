@@ -306,4 +306,5 @@ object MovieCatalog{
             setOf(Genre.DRAMA), 8.4f, 8.0f, "Мрачная ирония Голливуда: стареющая звезда немого кино Норма Десмонд заманивает в свой мир молодого сценариста, надеясь вернуть былую славу. Чем дальше заходит их странные отношения, тем очевиднее становится — время нельзя обмануть. Фильм о цене славы и иллюзиях, которые могут разрушить жизнь.",
             "https://m.media-amazon.com/images/M/MV5BMTU0NTkyNzYwMF5BMl5BanBnXkFtZTgwMDU0NDk5MTI@._V1_.jpg", 3, 4),
         )
+    val movieById = movieList.associateBy { it.id }
 }

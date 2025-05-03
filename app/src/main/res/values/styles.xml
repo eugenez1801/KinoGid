@@ -69,7 +69,6 @@
 
 
     <style name="DialogTheme" parent="@style/ThemeOverlay.Material3.Dialog">
-        <item name="android:background">@color/primaryColor</item>
         <item name="materialAlertDialogBodyTextStyle">@style/MaterialAlertDialogText</item>
         <item name="buttonBarPositiveButtonStyle">@style/MyButtonStyle</item>
         <item name="buttonBarNegativeButtonStyle">@style/MyButtonStyle</item>
