@@ -4,9 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AutoCompleteTextView
 import android.widget.ImageView
 import android.widget.SearchView
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -25,7 +27,24 @@ class SearchFragment: Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_search, container, false)
+
+        //больше никогда обычный SearchView не юзать (брать из Material, либо AppCompat)
         val searchView = view.findViewById<SearchView>(R.id.searchView)
+        val searchTextId = searchView.context.resources
+            .getIdentifier("android:id/search_src_text", null, null)
+        val searchText = searchView.findViewById<AutoCompleteTextView>(searchTextId)
+        searchText.setTextColor(ContextCompat.getColor(requireContext(), R.color.secondaryColor))
+        searchText.setHintTextColor(ContextCompat.getColor(requireContext(), R.color.secondaryColorHint))
+
+        val searchIconId = searchView.context.resources
+            .getIdentifier("android:id/search_mag_icon", null, null)
+        val searchIcon = searchView.findViewById<ImageView>(searchIconId)
+        searchIcon.setColorFilter(ContextCompat.getColor(requireContext(), R.color.secondaryColor))
+
+        val closeButtonId = searchView.context.resources
+            .getIdentifier("android:id/search_close_btn", null, null)
+        val closeButton = searchView.findViewById<ImageView>(closeButtonId)
+        closeButton.setColorFilter(ContextCompat.getColor(requireContext(), R.color.secondaryColor))
 
         val movieRecyclerView = view.findViewById<RecyclerView>(R.id.movie_recycler_view)
         movieRecyclerView.layoutManager = LinearLayoutManager(context)

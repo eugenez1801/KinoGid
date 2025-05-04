@@ -81,4 +81,8 @@
         <item name="android:textSize">16sp</item>
     </style>
 
+    <style name="checkBoxStyle" parent="Base.Theme.AppCompat"><!--нужно для самсунга, цвет галочки не фиолетовый-->
+        <item name="colorAccent">@color/backgroundColor</item>
+    </style>
+
 </resources>

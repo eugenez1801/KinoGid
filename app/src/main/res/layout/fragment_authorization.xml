@@ -109,9 +109,10 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/password" />
 
-    <CheckBox
+    <com.google.android.material.checkbox.MaterialCheckBox
         android:id="@+id/remember_me"
         style="@style/TextAppearance.PTSerifCaption.AddText"
+        android:theme="@style/checkBoxStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
@@ -120,6 +121,8 @@
 
         android:text="Запомнить меня"
         android:textColor="@color/buttonTextColor"
+
+        app:buttonTint="@color/check_box_tint"
 
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/enter_button" />

@@ -1,11 +1,10 @@
 package com.example.kinogid
 
-import android.app.AlertDialog
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -20,7 +19,6 @@ import com.example.kinogid.movies.Movie
 import com.example.kinogid.movies.MovieCatalog
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textfield.TextInputEditText
-import org.w3c.dom.Text
 
 class MovieFragment: Fragment() {
     private lateinit var viewModel: MainViewModel
@@ -215,6 +213,7 @@ class MovieFragment: Fragment() {
             if (viewModel.watchedMovie.value != null){
                 MaterialAlertDialogBuilder(requireContext(), R.style.DialogTheme)
                     .setMessage("Вы уверены, что хотите исключить фильм из списка просмотренных?")
+                    .setBackground(ColorDrawable(ContextCompat.getColor(requireContext(), R.color.primaryColor)))
                     .setPositiveButton("Да") { _, _ ->
                         viewModel.updateStatusWatchedMovie(movie.id) { resultCode ->
                             if (resultCode == 1) {

@@ -56,7 +56,7 @@ class ListsFragment: Fragment() {
         listRecyclerView.layoutManager = LinearLayoutManager(context)
         listRecyclerView.adapter = adapter
 
-        viewModel.getListWatchedMovies()
+        viewModel.getListIdWatchedMovies()
         viewModel.listWatchedMovies.observe(viewLifecycleOwner){ listOfMoviesId ->
             controlWatchedMoviesField(listOfMoviesId)//передаст null, если list == null
 //            Log.d("DEBUGSIZE", "В observe ${listOfMoviesId?.size.toString()}")

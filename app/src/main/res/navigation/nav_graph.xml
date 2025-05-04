@@ -18,6 +18,9 @@
         <action
             android:id="@+id/action_menu_recommendations_to_listsFragment"
             app:destination="@id/menu_lists" />
+        <action
+            android:id="@+id/action_menu_recommendations_to_movieFragment"
+            app:destination="@id/movieFragment" />
     </fragment>
 
     <fragment

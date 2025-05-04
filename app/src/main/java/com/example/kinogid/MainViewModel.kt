@@ -5,10 +5,14 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.kinogid.movies.Genre
+import com.example.kinogid.movies.Movie
 import kotlinx.coroutines.launch
 import java.util.UUID
 
-class MainViewModel(private val userRepository: UserRepository): ViewModel() {
+class MainViewModel(
+    private val userRepository: UserRepository,
+    private val recommendationUseCase: GetRecommendationsUseCase
+): ViewModel() {
     val _user = MutableLiveData<User?>()
     val user: LiveData<User?> get() = _user
     fun getUserByLogin(login: String){
@@ -70,7 +74,7 @@ class MainViewModel(private val userRepository: UserRepository): ViewModel() {
                 onResult(2)
             }
             getWatchedMovie(movieId)
-            getListWatchedMovies()//обновляем список после изменений в этом методе
+            getListIdWatchedMovies()//обновляем список после изменений в этом методе
         }
     }
 
@@ -88,9 +92,9 @@ class MainViewModel(private val userRepository: UserRepository): ViewModel() {
 
     val _listWatchedMovies = MutableLiveData<List<Int>?>()
     val listWatchedMovies: LiveData<List<Int>?> get() = _listWatchedMovies
-    fun getListWatchedMovies(){
+    fun getListIdWatchedMovies(){
         viewModelScope.launch {
-            val listWatchedMovies = userRepository.getListWatchedMovies(user.value!!.id)
+            val listWatchedMovies = userRepository.getListIdWatchedMovies(user.value!!.id)
             _listWatchedMovies.postValue(listWatchedMovies)
         }
     }
@@ -155,6 +159,17 @@ class MainViewModel(private val userRepository: UserRepository): ViewModel() {
     fun deleteListOfMovies(listId: UUID){
         viewModelScope.launch {
             userRepository.deleteListOfMovies(listId)
+        }
+    }
+
+
+    //система рекомендаций
+    val _listOfRecommendation = MutableLiveData<List<Movie>>()
+    val listOfRecommendation: LiveData<List<Movie>> get() = _listOfRecommendation
+    fun updateListOfRecommendation(){
+        viewModelScope.launch {
+            val listOfRecommendation = recommendationUseCase.getRecommendationList(user.value!!.id)
+            _listOfRecommendation.postValue(listOfRecommendation)
         }
     }
 }
