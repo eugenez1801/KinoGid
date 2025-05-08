@@ -11,8 +11,6 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
-import androidx.compose.ui.graphics.Color
 import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.core.view.isGone
@@ -96,7 +94,7 @@ class DetailListFragment: Fragment(), MovieSelectorDialogFragment.OnMoviesSelect
                             findNavController().popBackStack()
                         }
                     }
-                    else Toast.makeText(requireContext(), "Для создание списка Вы должны ввести название и внести пару фильмов",
+                    else Toast.makeText(requireContext(), "Введите название и добавьте фильмы",
                         Toast.LENGTH_SHORT).show()
                 }
             }

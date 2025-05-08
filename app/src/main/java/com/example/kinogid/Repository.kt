@@ -4,13 +4,9 @@ import com.example.kinogid.database.UserDao
 import java.util.UUID
 
 
-class UserRepository(private val userDao: UserDao) {
+class Repository(private val userDao: UserDao) {
     suspend fun isEmpty(): Boolean{
         return userDao.isEmpty()
-    }
-
-    fun getUser(id: UUID): User{ //LiveData<User?>
-        return userDao.getUser(id)
     }
 
     suspend fun getUserByLogin(login: String): User?{

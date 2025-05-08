@@ -24,10 +24,15 @@ class RegistrationFragment: Fragment() {
             "app_database"
         ).build()
         val userDao = userDatabase.userDao()
-        val userRepository = UserRepository(userDao)
-        val viewModel = AuthViewModel(userRepository)
+        val repository = Repository(userDao)
+        val viewModel = AuthViewModel(repository)
 
         val view = inflater.inflate(R.layout.fragment_registration, container, false)
+        view.setOnTouchListener { view, motionEvent ->
+            view.hideKeyboard()
+            view.clearFocus()
+            false
+        }
 
         val enterText = view.findViewById<TextView>(R.id.enterText)
 

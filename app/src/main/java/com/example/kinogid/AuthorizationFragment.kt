@@ -30,12 +30,17 @@ class AuthorizationFragment: Fragment() {
             "app_database"
         ).build()
         val userDao = database.userDao()
-        val userRepository = UserRepository(userDao)
-        val viewModel = AuthViewModel(userRepository)
+        val repository = Repository(userDao)
+        val viewModel = AuthViewModel(repository)
 
         preferencesManager = PreferencesManager(requireContext())
 
         val view = inflater.inflate(R.layout.fragment_authorization, container, false)
+        view.setOnTouchListener { view, motionEvent ->
+            view.hideKeyboard()
+            view.clearFocus()
+            false
+        }
 
         val registerText = view.findViewById<TextView>(R.id.registrationText)
 

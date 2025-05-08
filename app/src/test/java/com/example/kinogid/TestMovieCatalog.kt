@@ -1,26 +1,11 @@
-package com.example.kinogid.movies
+package com.example.kinogid
 
-object MovieCatalog{
-    /*val actionGenre = Genre.ACTION.displayingGenre
-    val adventureGenre = Genre.ADVENTURE.displayingGenre
-    val animationGenre = Genre.ANIMATION.displayingGenre
-    val biographyGenre = Genre.BIOGRAPHY.displayingGenre
-    val comedyGenre = Genre.COMEDY.displayingGenre
-    val crimeGenre = Genre.CRIME.displayingGenre
-    val documentaryGenre = Genre.DOCUMENTARY.displayingGenre
-    val dramaGenre = Genre.DRAMA.displayingGenre
-    val familyGenre = Genre.FAMILY.displayingGenre
-    val fantasyGenre = Genre.FANTASY.displayingGenre
-    val horrorGenre = Genre.HORROR.displayingGenre
-    val musicalGenre = Genre.MUSICAL.displayingGenre
-    val mysteryGenre = Genre.MYSTERY.displayingGenre
-    val romanceGenre = Genre.ROMANCE.displayingGenre
-    val sctFiGenre = Genre.SCI_FI.displayingGenre
-    val sportGenre = Genre.SPORT.displayingGenre
-    val superheroGenre = Genre.SUPERHERO.displayingGenre
-    val thrillerGenre = Genre.THRILLER.displayingGenre
-    val warGenre = Genre.WAR.displayingGenre
-    val westernGenre = Genre.WESTERN.displayingGenre*/
+import com.example.kinogid.movies.Genre
+import com.example.kinogid.movies.Movie
+import com.example.kinogid.movies.MovieCatalog
+
+object TestMovieCatalog {
+
     var movieList = listOf(
         Movie(0, "Побег из Шоушенка", 1994, 142, "16+",
             setOf(Genre.CRIME, Genre.DRAMA), 9.3f, 9.1f, "Мудрая " +
@@ -304,6 +289,6 @@ object MovieCatalog{
         Movie(61, "Сансет бульвар", 1950, 110 , "16+",
             setOf(Genre.DRAMA), 8.4f, 8.0f, "Мрачная ирония Голливуда: стареющая звезда немого кино Норма Десмонд заманивает в свой мир молодого сценариста, надеясь вернуть былую славу. Чем дальше заходит их странные отношения, тем очевиднее становится — время нельзя обмануть. Фильм о цене славы и иллюзиях, которые могут разрушить жизнь.",
             "https://m.media-amazon.com/images/M/MV5BMTU0NTkyNzYwMF5BMl5BanBnXkFtZTgwMDU0NDk5MTI@._V1_.jpg", 3, 4),
-        )
-    var movieById = movieList.associateBy { it.id }
+    )
+    var movieById = MovieCatalog.movieList.associateBy { it.id }
 }

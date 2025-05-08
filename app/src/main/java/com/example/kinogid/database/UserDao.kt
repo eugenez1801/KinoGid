@@ -15,9 +15,6 @@ interface UserDao {
     @Query("SELECT EXISTS(SELECT 1 FROM user LIMIT 1)")
     fun isEmpty(): Boolean
 
-    @Query("SELECT * FROM user WHERE id = (:id)")
-    fun getUser(id: UUID): User
-
     @Query("SELECT * FROM user WHERE login = (:login)")
     suspend fun getUserByLogin(login: String): User?
 

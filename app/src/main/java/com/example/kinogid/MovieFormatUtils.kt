@@ -1,5 +1,8 @@
 package com.example.kinogid
 
+import android.content.Context
+import android.view.View
+import android.view.inputmethod.InputMethodManager
 import com.example.kinogid.movies.Genre
 
 fun normalizeDuration(duration: Int): String{
@@ -33,4 +36,10 @@ fun normalizeGenres(genres: Set<Genre>): String{
     if(Genre.WESTERN in genres) result += "${Genre.WESTERN.displayingGenre}, "
     result = result.removeSuffix(", ")
     return result
+}
+
+//не MovieFormat. Прячет клавиатуру, когда кликают в рандомное место
+fun View.hideKeyboard() {//функция-расширение (extension function), поэтому View.
+    val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+    imm.hideSoftInputFromWindow(windowToken, 0)
 }

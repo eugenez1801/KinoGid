@@ -31,11 +31,11 @@ class MainActivity : AppCompatActivity() {
             "app_database"
         ).build()
         val userDao = database.userDao()
-        val userRepository = UserRepository(userDao)
+        val repository = Repository(userDao)
         val recommendationEngine = RecommendationEngine()
-        val recommendationsUseCase = GetRecommendationsUseCase(userRepository, recommendationEngine)
+        val recommendationsUseCase = GetRecommendationsUseCase(repository, recommendationEngine)
 
-        val factory = ViewModelFactory(userRepository, recommendationsUseCase)
+        val factory = ViewModelFactory(repository, recommendationsUseCase)
         viewModel = ViewModelProvider(this, factory)[MainViewModel::class.java]
         val bottomNav = findViewById<BottomNavigationView>(R.id.bottom_nav)
         val userLogin = intent.getStringExtra(LOGIN_OF_USER)!!

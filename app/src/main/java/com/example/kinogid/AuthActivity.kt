@@ -20,8 +20,8 @@ class AuthActivity : AppCompatActivity() {
             "app_database"
         ).build()
         val userDao = database.userDao()
-        val userRepository = UserRepository(userDao)
-        val viewModel = AuthViewModel(userRepository)
+        val repository = Repository(userDao)
+        val viewModel = AuthViewModel(repository)
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_auth)

@@ -10,14 +10,14 @@ import kotlinx.coroutines.launch
 import java.util.UUID
 
 class MainViewModel(
-    private val userRepository: UserRepository,
+    private val repository: Repository,
     private val recommendationUseCase: GetRecommendationsUseCase
 ): ViewModel() {
     val _user = MutableLiveData<User?>()
     val user: LiveData<User?> get() = _user
     fun getUserByLogin(login: String){
         viewModelScope.launch {
-            val user = userRepository.getUserByLogin(login)
+            val user = repository.getUserByLogin(login)
             _user.postValue(user)
         }
     }
@@ -26,7 +26,7 @@ class MainViewModel(
     val userPreferences: LiveData<UserPreferences?> get() = _userPrefences
     fun getUserPreferences(/*userId: UUID*/)/*: UserPreferences?*/{//изначально передавал id
         viewModelScope.launch {
-            val userPreferences = userRepository.getUserPreferences(user.value!!.id)//теперь берется из ViewModel id
+            val userPreferences = repository.getUserPreferences(user.value!!.id)//теперь берется из ViewModel id
             _userPrefences.postValue(userPreferences)
         }
     }
@@ -41,7 +41,7 @@ class MainViewModel(
                     genres = genresString
                 )
             }
-            userRepository.saveUserPreferences(userPreferences!!)
+            repository.saveUserPreferences(userPreferences!!)
             getUserPreferences()
             /*val newUserPreferences = userRepository.getUserPreferences(user.value!!.id)//теперь берется из ViewModel id
             _userPrefences.postValue(newUserPreferences)*/
@@ -52,7 +52,7 @@ class MainViewModel(
     val watchedMovie: LiveData<WatchedMovie?> get() = _watchedMovie
     fun getWatchedMovie(movieId: Int){ //нужен для начальной инициализации полей во фрагменте с деталями фильма
         viewModelScope.launch {
-            val watchedMovie = userRepository.getWatchedMovie(user.value!!.id, movieId)
+            val watchedMovie = repository.getWatchedMovie(user.value!!.id, movieId)
             _watchedMovie.postValue(watchedMovie)
         }
     }
@@ -62,15 +62,15 @@ class MainViewModel(
         * 1 - фильм был добавлен в список просмотренных
         * 2 - фильм был удален из списка просмотренных*/
         viewModelScope.launch {
-            if (userRepository.getWatchedMovie(user.value!!.id, movieId) == null) {
+            if (repository.getWatchedMovie(user.value!!.id, movieId) == null) {
                 val watchedMovie = WatchedMovie(
                     userId = user.value!!.id,
                     movieId = movieId)
-                userRepository.makeMovieIsWatched(watchedMovie)
+                repository.makeMovieIsWatched(watchedMovie)
                 onResult(1)
             }
             else{
-                userRepository.deleteWatchedMovie(user.value!!.id, movieId)
+                repository.deleteWatchedMovie(user.value!!.id, movieId)
                 onResult(2)
             }
             getWatchedMovie(movieId)
@@ -80,13 +80,13 @@ class MainViewModel(
 
     fun updateUserRating(movieId: Int, userRating: Int){
         viewModelScope.launch {
-            userRepository.updateUserRating(user.value!!.id, movieId, userRating)
+            repository.updateUserRating(user.value!!.id, movieId, userRating)
         }
     }
 
     fun updateDiaryText(movieId: Int, diaryText: String){
         viewModelScope.launch {
-            userRepository.updateDiaryText(user.value!!.id, movieId, diaryText)
+            repository.updateDiaryText(user.value!!.id, movieId, diaryText)
         }
     }
 
@@ -94,7 +94,7 @@ class MainViewModel(
     val listWatchedMovies: LiveData<List<Int>?> get() = _listWatchedMovies
     fun getListIdWatchedMovies(){
         viewModelScope.launch {
-            val listWatchedMovies = userRepository.getListIdWatchedMovies(user.value!!.id)
+            val listWatchedMovies = repository.getListIdWatchedMovies(user.value!!.id)
             _listWatchedMovies.postValue(listWatchedMovies)
         }
     }
@@ -107,7 +107,7 @@ class MainViewModel(
                 title = title,
                 moviesId = moviesId,
                 description = description)
-            userRepository.addListOfMovies(listMovies)
+            repository.addListOfMovies(listMovies)
         }
     }
 
@@ -115,7 +115,7 @@ class MainViewModel(
     val listOfListsMovies: LiveData<List<ListMovies>> get() = _listOfListsMovies
     fun getUserLists(){
         viewModelScope.launch {
-            val listOfListsMovies = userRepository.getUserLists(user.value!!.id)
+            val listOfListsMovies = repository.getUserLists(user.value!!.id)
             _listOfListsMovies.postValue(listOfListsMovies)
         }
     }
@@ -125,7 +125,7 @@ class MainViewModel(
     fun getListOfMovies(listId: UUID){
         _listOfMovies.postValue(null)
         viewModelScope.launch {
-            val listOfMovies = userRepository.getListOfMovies(listId)
+            val listOfMovies = repository.getListOfMovies(listId)
             _listOfMovies.postValue(listOfMovies)
         }
     }
@@ -140,25 +140,25 @@ class MainViewModel(
     }*/
     fun updateTitle(listId: UUID, title: String){
         viewModelScope.launch {
-            userRepository.updateTitle(listId, title)
+            repository.updateTitle(listId, title)
         }
     }
 
     fun updateMovies(listId: UUID, moviesId: String){
         viewModelScope.launch {
-            userRepository.updateMovies(listId, moviesId)
+            repository.updateMovies(listId, moviesId)
         }
     }
 
     fun updateDescription(listId: UUID, description: String){
         viewModelScope.launch {
-            userRepository.updateDescription(listId, description)
+            repository.updateDescription(listId, description)
         }
     }
 
     fun deleteListOfMovies(listId: UUID){
         viewModelScope.launch {
-            userRepository.deleteListOfMovies(listId)
+            repository.deleteListOfMovies(listId)
         }
     }
 
