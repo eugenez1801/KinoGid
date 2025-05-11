@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/menu_recommendations"
-        android:name="com.example.kinogid.RecommendationsFragment"
+        android:name="com.example.kinogid.presentation.main.RecommendationsFragment"
         android:label="fragment_recommendations" >
         <action
             android:id="@+id/action_recommendationsFragment_to_profileFragment"
@@ -25,7 +25,7 @@
 
     <fragment
         android:id="@+id/menu_search"
-        android:name="com.example.kinogid.SearchFragment"
+        android:name="com.example.kinogid.presentation.main.SearchFragment"
         android:label="fragment_search" >
         <action
             android:id="@+id/action_menu_search_to_menu_profile"
@@ -43,7 +43,7 @@
 
     <fragment
         android:id="@+id/menu_lists"
-        android:name="com.example.kinogid.ListsFragment"
+        android:name="com.example.kinogid.presentation.main.lists.ListsFragment"
         android:label="fragment_lists" >
         <action
             android:id="@+id/action_listsFragment_to_menu_recommendations"
@@ -64,7 +64,7 @@
 
     <fragment
         android:id="@+id/menu_profile"
-        android:name="com.example.kinogid.ProfileFragment"
+        android:name="com.example.kinogid.presentation.main.profile.ProfileFragment"
         android:label="fragment_profile" >
         <action
             android:id="@+id/action_profileFragment_to_recommendationsFragment"
@@ -79,7 +79,7 @@
 
     <fragment
         android:id="@+id/movieFragment"
-        android:name="com.example.kinogid.MovieFragment"
+        android:name="com.example.kinogid.presentation.main.MovieFragment"
         android:label="fragment_movie" >
         <argument
             android:name="movieId"
@@ -88,7 +88,7 @@
 
     <fragment
         android:id="@+id/detailWatchedListFragment"
-        android:name="com.example.kinogid.DetailWatchedListFragment"
+        android:name="com.example.kinogid.presentation.main.lists.DetailWatchedListFragment"
         android:label="fragment_watched_detail_list" >
         <action
             android:id="@+id/action_detailWatchedListFragment_to_movieFragment"
@@ -97,7 +97,7 @@
 
     <fragment
         android:id="@+id/detailListFragment"
-        android:name="com.example.kinogid.DetailListFragment"
+        android:name="com.example.kinogid.presentation.main.lists.DetailListFragment"
         android:label="fragment_detail_list" >
         <action
             android:id="@+id/action_detailListFragment_to_movieFragment"
