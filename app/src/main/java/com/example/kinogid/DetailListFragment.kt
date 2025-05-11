@@ -1,5 +1,6 @@
 package com.example.kinogid
 
+import android.content.Intent
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
@@ -36,6 +37,7 @@ class DetailListFragment: Fragment(), MovieSelectorDialogFragment.OnMoviesSelect
     lateinit var selectMoviesButton: Button
     lateinit var footer: TextView
     lateinit var backImageView: ImageView
+    lateinit var repostImageView: ImageView
     lateinit var deleteImageView: ImageView
     lateinit var movieRecyclerView: RecyclerView
     lateinit var oldListOfMovies: ListMovies
@@ -106,6 +108,24 @@ class DetailListFragment: Fragment(), MovieSelectorDialogFragment.OnMoviesSelect
             }
         }
 
+        repostImageView = view.findViewById<ImageView?>(R.id.repost_iv).apply {
+            if (!isNewList){
+                setOnClickListener {
+                    Intent(Intent.ACTION_SEND).apply {
+                        type = "text/plain"
+                        putExtra(Intent.EXTRA_TEXT, createMessageText())
+                        putExtra(
+                            Intent.EXTRA_SUBJECT,
+                            "Подборка фильмов")
+                    }.also { intent ->
+                        val chooserIntent =
+                            Intent.createChooser(intent, "Поделиться через...")
+                        startActivity(chooserIntent)
+                    }
+                }
+            } else isGone = true
+        }
+
         deleteImageView = view.findViewById<ImageView?>(R.id.delete_iv).apply {
             if (!isNewList){
                 setOnClickListener {
@@ -172,13 +192,30 @@ class DetailListFragment: Fragment(), MovieSelectorDialogFragment.OnMoviesSelect
 
     private fun updateUI(){
         titleTextView.text = newListOfMovies.title
-        Log.d("KOLICHE", newListOfMovies.moviesId)
+//        Log.d("KOLICHE", newListOfMovies.moviesId)
 //        val countMovies = newListOfMovies.moviesId.split(",").size
-        if (newListOfMovies.moviesId.length == 0) countTextView.text = "Общее количество фильмов: 0"
-        else countTextView.text = "Общее количество фильмов: ${newListOfMovies.moviesId.split(",").size}"
+        if (newListOfMovies.moviesId.length == 0)
+        {
+            countTextView.text = "Общее количество фильмов: 0"
+            repostImageView.isGone = true
+        }
+        else {
+            countTextView.text = "Общее количество фильмов: ${newListOfMovies.moviesId.split(",").size}"
+            repostImageView.isGone = false
+        }
         descriptionTextView.text = newListOfMovies.description
         adapter = MovieAdapter(getMovieList(newListOfMovies.moviesId))
         movieRecyclerView.adapter = adapter
+    }
+
+    private fun createMessageText(): String{
+        val moviesListString = getMovieList(newListOfMovies.moviesId).map {
+            it.title
+        }.toString().replace("[", "").replace("]", "")
+//        Log.d("MessageText", moviesListString)
+
+        return "Привет! Хочу поделиться с тобой своей подборкой фильмов — ${newListOfMovies.title}. " +
+                "Вот что в нее входит: $moviesListString."
     }
 
     //для случая 0,1,2,3,4, и 1,2,3,4,0, (чтобы эти строки считались одинаковыми)
@@ -242,7 +279,7 @@ class DetailListFragment: Fragment(), MovieSelectorDialogFragment.OnMoviesSelect
 
         else if (type == 2){
             val textView = view as TextView
-            inputField.setText(textView.text)
+            if (textView.text != "Введите описание списка") inputField.setText(textView.text)
             MaterialAlertDialogBuilder(requireContext(), R.style.DialogTheme)
                 .setMessage("Изменение описания списка")
                 .setView(inputField)
@@ -392,6 +429,8 @@ class DetailListFragment: Fragment(), MovieSelectorDialogFragment.OnMoviesSelect
         newMoviesId = selectedMoviesId.toMutableSet()//нужен для сохранения в базу данных в дальнейшем
         if (!isNewList) newListOfMovies.moviesId = selectedMoviesId.joinToString(",")
         countTextView.text = "Общее количество фильмов: ${selectedMoviesId.size}"
+        if (selectedMoviesId.size == 0 || isNewList) repostImageView.isGone = true
+        else repostImageView.isGone = false
         adapter = MovieAdapter(getSetMoviesFromSetOfIds(selectedMoviesId).toList())
         movieRecyclerView.adapter = adapter
         if (!isNewList) doListsDiffer()

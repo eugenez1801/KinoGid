@@ -32,6 +32,19 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
+                android:id="@+id/repost_iv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:src="@drawable/ic_repost"
+
+                android:layout_marginEnd="15dp"
+
+                app:layout_constraintBottom_toBottomOf="@+id/delete_iv"
+                app:layout_constraintEnd_toStartOf="@+id/delete_iv"
+                app:layout_constraintTop_toTopOf="@+id/delete_iv" />
+
+            <ImageView
                 android:id="@+id/delete_iv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
