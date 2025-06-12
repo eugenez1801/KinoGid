@@ -297,7 +297,8 @@ class DetailListFragment: Fragment(), MovieSelectorDialogFragment.OnMoviesSelect
                     var newText = inputField.text.toString()/*.replace("\n\n\n", "\n\n") просто так
                     не пойдет, поскольку если будет 7 подряд \n, то он уберет только 3, а не все 6 нужных*/
                     while ("\n\n\n" in newText) newText = newText.replace("\n\n\n", "\n\n")
-                    while (newText.last() == '\n') newText = newText.dropLast(1)
+                    if (newText.isNotEmpty()) while (newText.last() == '\n') newText = newText.dropLast(1)/*было Char sequence is empty
+                    при нажатии "Сохранить" с пустой строкой*/
                     if (newText.isNotBlank()){
                         textView.text = newText
                         if (!isNewList) newListOfMovies.description = newText
