@@ -4,13 +4,14 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
-import androidx.room.Room
 import com.example.kinogid.presentation.main.MainActivity
 import com.example.kinogid.utils.PreferencesManager
 import com.example.kinogid.R
 import com.example.kinogid.data.repository.Repository
 import com.example.kinogid.data.database.AppDatabase
+import com.example.kinogid.di.AuthViewModelFactory
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
@@ -18,14 +19,8 @@ class AuthActivity : AppCompatActivity() {
     private lateinit var preferencesManager: PreferencesManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        val database = Room.databaseBuilder(
-            this,
-            AppDatabase::class.java,
-            "app_database"
-        ).build()
-        val userDao = database.userDao()
-        val repository = Repository(userDao)
-        val viewModel = AuthViewModel(repository)
+        val factory = AuthViewModelFactory(applicationContext)
+        val viewModel = ViewModelProvider(this, factory) [AuthViewModel::class.java]
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_auth)
