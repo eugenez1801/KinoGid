@@ -8,27 +8,20 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.room.Room
+import androidx.lifecycle.ViewModelProvider
 import com.example.kinogid.R
-import com.example.kinogid.data.repository.Repository
-import com.example.kinogid.data.database.AppDatabase
 import com.example.kinogid.utils.hideKeyboard
 import com.google.android.material.textfield.TextInputEditText
 
 class RegistrationFragment: Fragment() {
+    private lateinit var viewModel: AuthViewModel
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val userDatabase = Room.databaseBuilder(
-            requireContext().applicationContext,
-            AppDatabase::class.java,
-            "app_database"
-        ).build()
-        val userDao = userDatabase.userDao()
-        val repository = Repository(userDao)
-        val viewModel = AuthViewModel(repository)
+        viewModel = ViewModelProvider(requireActivity())[AuthViewModel::class.java]
 
         val view = inflater.inflate(R.layout.fragment_registration, container, false)
         view.setOnTouchListener { view, motionEvent ->

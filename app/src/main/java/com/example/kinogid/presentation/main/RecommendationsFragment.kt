@@ -42,7 +42,6 @@ class RecommendationsFragment: Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        viewModel = ViewModelProvider(requireActivity())[MainViewModel::class.java]
 
         val view = inflater.inflate(R.layout.fragment_recommendations, container, false)
         val nameTextView = view.findViewById<TextView>(R.id.name_text)

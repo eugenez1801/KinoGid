@@ -10,33 +10,25 @@ import android.widget.CheckBox
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
-import androidx.room.Room
 import com.example.kinogid.presentation.main.MainActivity
 import com.example.kinogid.utils.PreferencesManager
 import com.example.kinogid.R
-import com.example.kinogid.data.repository.Repository
-import com.example.kinogid.data.database.AppDatabase
 import com.example.kinogid.utils.hideKeyboard
 import com.google.android.material.textfield.TextInputEditText
 import kotlinx.coroutines.launch
 
 class AuthorizationFragment: Fragment() {
     private lateinit var preferencesManager: PreferencesManager
+    private lateinit var viewModel: AuthViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val database = Room.databaseBuilder(
-            requireContext(),
-            AppDatabase::class.java,
-            "app_database"
-        ).build()
-        val userDao = database.userDao()
-        val repository = Repository(userDao)
-        val viewModel = AuthViewModel(repository)
+        viewModel = ViewModelProvider(requireActivity())[AuthViewModel::class.java]
 
         preferencesManager = PreferencesManager(requireContext())
 

@@ -9,8 +9,6 @@ import androidx.lifecycle.lifecycleScope
 import com.example.kinogid.presentation.main.MainActivity
 import com.example.kinogid.utils.PreferencesManager
 import com.example.kinogid.R
-import com.example.kinogid.data.repository.Repository
-import com.example.kinogid.data.database.AppDatabase
 import com.example.kinogid.di.AuthViewModelFactory
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
@@ -49,9 +47,9 @@ class AuthActivity : AppCompatActivity() {
                 }
             }*/
             val isTableEmpty = try {
-                viewModel.isEmpty() // Это suspend-функция, будет выполнена в фоне
+                viewModel.isEmpty()
             } catch (e: Exception) {
-                true // В случае ошибки считаем таблицу пустой
+                true
             }
             val rememberMe = preferencesManager.rememberMeFlow.first()//а это один раз проверить и все
             if(rememberMe && isTableEmpty){//не нужен ! у isTableEmpty
